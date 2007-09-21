@@ -1,0 +1,81 @@
+#!/usr/bin/perl -w
+
+use warnings;
+use strict;
+use Fcntl qw(:mode);
+
+sub write_valamakefile {
+    my $automakefile = shift;
+    my $valamakefile = $automakefile;
+
+    $valamakefile =~ s/\.am$/.vm/g;
+
+    open AUTOMAKEFILE, "<${automakefile}" or die $!;
+    open VALAMAKEFILE, ">${valamakefile}.$$" or die $!;
+
+    my $pattern = '';
+    my $built_sources = '';
+    my $built_sources_assign = '=';
+    my $include_seen = 0;
+
+    while (my $line = <AUTOMAKEFILE>) {
+        $pattern .= $line;
+        next if $line =~ /\\$/;
+
+        if ($pattern =~ /^(\w+)_SOURCES/) {
+            my ($target, $sources, $cfiles) = ($1, '', '');
+
+            while ($pattern =~ s/\b(\S+)\.vala//) {
+                $sources .= " $1.vala";
+                $cfiles .= " $1.c $1.h";
+            }
+
+            $sources =~ s/^\s+//;
+            $cfiles =~ s/^\s+//;
+
+            if ($cfiles) {
+                print VALAMAKEFILE "${target}_SOURCES += ${cfiles}\n";
+                print VALAMAKEFILE "${target}.vala-stamp: ${sources}\n";
+                print VALAMAKEFILE "\t\$(VALAC) \$(VALAFLAGS) \$(${target}_VALAFLAGS) \$^\n";
+                print VALAMAKEFILE "\ttouch ${target}.vala-stamp\n";
+                print VALAMAKEFILE "clean-local: vala-clean-${target}\n";
+                print VALAMAKEFILE "vala-clean-${target}:\n";
+                print VALAMAKEFILE "\trm -f ${target}.vala-stamp ${cfiles}\n";
+
+                $built_sources .= " ${target}.vala-stamp $cfiles";
+            }
+        } elsif ($pattern =~ /^BUILT_SOURCES\s*=/) {
+            $built_sources_assign = '+=';
+        } elsif ($pattern =~ /^include\s+Makefile.vm/) {
+            $include_seen = 1;
+        }
+
+        $pattern = '';
+    }
+
+    print VALAMAKEFILE "BUILT_SOURCES ${built_sources_assign} ${built_sources}\n";
+    print VALAMAKEFILE "Makefile.vm: Makefile.am\n";
+    print VALAMAKEFILE "\t\$(top_srcdir)/vala-support Makefile.am\n";
+
+    close VALAMAKEFILE;
+    close AUTOMAKEFILE;
+
+    if ($include_seen) {
+        (my $self = $0) =~ s/.*\///;
+        print "$self: creating ${valamakefile}\n";
+        rename "${valamakefile}.$$", ${valamakefile};
+    } else {
+        unlink "${valamakefile}.$$";
+    }
+}
+
+my @AUTOMAKEFILES = @ARGV;
+
+@AUTOMAKEFILES = `find -name Makefile.am` if not @AUTOMAKEFILES;
+
+for my $automakefile(@AUTOMAKEFILES) {
+    $automakefile =~ s/\.\/(.*)\n/$1/;
+    write_valamakefile $automakefile;
+}
+
+# vim: sw=4 sta et
