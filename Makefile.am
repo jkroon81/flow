@@ -4,4 +4,5 @@ EXTRA_DIST =             \
 	autogen.sh
 
 SUBDIRS =                \
-	flow
+	flow             \
+	util
