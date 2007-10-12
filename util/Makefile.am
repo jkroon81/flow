@@ -1,4 +1,5 @@
 CLEANFILES = *~
 
 EXTRA_DIST =              \
-	headerify
+	headerify         \
+	plot
