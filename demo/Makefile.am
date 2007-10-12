@@ -1,9 +1,13 @@
 CLEANFILES      = *~
 noinst_PROGRAMS =                          \
-	linear-test-equation
+	linear-test-equation               \
+	stiff-pendulum
 
 linear_test_equation_SOURCES =             \
 	linear-test-equation.vala
+
+stiff_pendulum_SOURCES =                   \
+	stiff-pendulum.vala
 
 VALAFLAGS =                                \
 	--vapidir=$(top_builddir)/flow     \
