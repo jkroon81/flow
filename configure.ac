@@ -7,6 +7,7 @@ PKG_CHECK_MODULES(GOBJECT, gobject-2.0)
 
 AC_OUTPUT(
 	Makefile
+	demo/Makefile
 	flow/Makefile
 	util/Makefile
 	)

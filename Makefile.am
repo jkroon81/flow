@@ -5,4 +5,5 @@ EXTRA_DIST =             \
 
 SUBDIRS =                \
 	flow             \
+	demo             \
 	util
