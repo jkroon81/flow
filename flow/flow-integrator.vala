@@ -6,7 +6,11 @@
  */
 
 public class Flow.Integrator : ODESolver {
-  public StepMethod step_method { get; set; }
+  StepMethod _step_method;
+
+  public StepMethod step_method {
+    set { _step_method = value; }
+  }
 
   public void run() {
     int i;
@@ -14,15 +18,15 @@ public class Flow.Integrator : ODESolver {
     double h;
     double local_error;
 
-    step_method.ode = _ode;
+    _step_method.ode = _ode;
     t = _ode.t_start;
     h = 1.0;
 
     while(t < _ode.t_stop) {
-      step_method.estimate_error(t, h);
-      local_error = step_method.error.norm_1();
+      _step_method.estimate_error(t, h);
+      local_error = _step_method.error.norm_1();
       if(local_error < _tolerance) {
-        step_method.estimate_x();
+        _step_method.estimate_x();
         t += h;
         // FIXME: Emit a signal once valac supports arrays
         //        as signal callback arguments.
@@ -30,7 +34,7 @@ public class Flow.Integrator : ODESolver {
           GLib.stdout.printf("x%d = %f, ", i, _ode.x.get()[i]);
         GLib.stdout.printf("t = %f\n", t);
       }
-      h = 0.9 * h * GLib.Math.pow(_tolerance / local_error, 1.0 / step_method.order);
+      h = 0.9 * h * GLib.Math.pow(_tolerance / local_error, 1.0 / _step_method.order);
       if(t + h > _ode.t_stop)
         h = _ode.t_stop - t;
     }
