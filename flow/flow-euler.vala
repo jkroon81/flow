@@ -7,28 +7,27 @@
 
 public class Flow.Euler : StepMethod {
   construct {
-    order = 2;
+    _order = 2;
   }
 
   public override void estimate_error (double t, double h) {
-    int i;
-    weak Vector x_h = vector[0];
-    weak Vector x_l = vector[1];
-    weak Vector dx = vector[2];
+    weak Vector x_h = _vector[0];
+    weak Vector x_l = _vector[1];
+    weak Vector dx = _vector[2];
 
-    integrator.ode.eval_f(dx.get(), x.get(), t);
+    _ode.eval_f(dx.get(), _ode.x.get(), t);
     dx.mul(dx, h);
-    x_l.add(x, dx);
+    x_l.add(_ode.x, dx);
     dx.mul(dx, 0.5);
-    x_h.add(x, dx);
-    integrator.ode.eval_f(dx.get(), x_h.get(), t + h/2);
+    x_h.add(_ode.x, dx);
+    _ode.eval_f(dx.get(), x_h.get(), t + h/2);
     dx.mul(dx, h/2);
     x_h.add(x_h, dx);
-    error.mul(x_h, -1.0);
-    error.add(error, x_l);
+    _error.mul(x_h, -1.0);
+    _error.add(_error, x_l);
   }
 
   public override void estimate_x () {
-    x.copy(vector[0]);
+    _ode.x.copy(_vector[0]);
   }
 }

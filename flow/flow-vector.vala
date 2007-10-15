@@ -6,28 +6,28 @@
  */
 
 public class Flow.Vector : GLib.Object {
-  double[] x;
+  double[] _x;
 
   public int size {
-    get { return x.length; }
+    get { return _x.length; }
     set {
-      if (x.length != value)
-        x = new double[value];
+      if (_x.length != value)
+        _x = new double[value];
     }
   }
 
   public weak double[] get () {
-    return x;
+    return _x;
   }
 
-  public void set (weak double[] _x) {
+  public void set (weak double[] x) {
     // FIXME: Use copy() method for arrays when
     //        valac supports it.
     int i;
 
-    size = _x.length;
+    size = x.length;
     for(i = 0; i < size; i++)
-      x[i] = _x[i];
+      _x[i] = x[i];
   }
 
   public void copy(Vector v) {
@@ -35,7 +35,7 @@ public class Flow.Vector : GLib.Object {
 
     size = v.size;
     for(i = 0; i < size; i++)
-      x[i] = v.x[i];
+      _x[i] = v._x[i];
   }
 
   public void mul(Vector v, double s) {
@@ -43,7 +43,7 @@ public class Flow.Vector : GLib.Object {
 
     size = v.size;
     for(i = 0; i < size; i++)
-      x[i] = v.x[i] * s;
+      _x[i] = v._x[i] * s;
   }
 
   public void add(Vector v1, Vector v2) {
@@ -52,7 +52,7 @@ public class Flow.Vector : GLib.Object {
     GLib.assert(v1.size == v2.size);
     size = v1.size;
     for(i = 0; i < size; i++)
-      x[i] = v1.x[i] + v2.x[i];
+      _x[i] = v1._x[i] + v2._x[i];
   }
 
   public double norm_1 () {
@@ -60,7 +60,7 @@ public class Flow.Vector : GLib.Object {
     double retval = 0.0;
 
     for(i = 0; i < size; i++)
-      retval += (x[i] > 0.0 ? x[i] : -x[i]);
+      retval += (_x[i] > 0.0 ? _x[i] : -_x[i]);
     return retval;
   }
 }

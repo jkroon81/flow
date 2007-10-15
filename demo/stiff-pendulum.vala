@@ -4,10 +4,6 @@ class StiffPendulum {
   class MyODE : ODE {
     double C = 1000.0;
 
-    construct {
-      n_states = 4;
-    }
-
     public override void f_func(weak double[] dx, weak double[] x, double t) {
       double lambda;
 
@@ -25,11 +21,10 @@ class StiffPendulum {
     var ode = new MyODE();
 
     integrator.step_method = new Euler();
-    integrator.step_method.integrator = integrator;
     integrator.ode = ode;
     ode.t_start = 0.0;
     ode.t_stop = 10.0;
-    ode.set_x_0(x_0);
+    ode.x.set(x_0);
     integrator.run();
 
     return 0;

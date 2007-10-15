@@ -7,29 +7,39 @@
 
 public abstract class Flow.StepMethod : GLib.Object {
   int N_VECTORS = 10;
-  protected Vector[] vector = new Vector[N_VECTORS];
-  public int order { get; set; }
-  public Vector x { get; set; }
-  public Vector error { get; set; }
-  public Integrator integrator { get; set; }
+  protected Vector _error;
+  protected Vector[] _vector;
+  protected ODE _ode;
+  protected int _order;
+
+  public int order {
+    get { return _order; }
+  }
+
+  public Vector error {
+    get { return _error; }
+  }
+
+  public ODE ode {
+    set {
+      int i;
+
+      _ode = value;
+      _error.size = _ode.x.size;
+      for(i = 0; i < N_VECTORS; i++)
+        _vector[i].size = _ode.x.size;
+    }
+  }
 
   construct {
-    x = new Vector();
-    error = new Vector();
+    int i;
+
+    _error = new Vector();
+    _vector = new Vector[N_VECTORS];
+    for(i = 0; i < N_VECTORS; i++)
+      _vector[i] = new Vector();
   }
 
   public abstract void estimate_error (double t, double h);
   public abstract void estimate_x ();
-
-  public void prepare (int n_states) {
-    int i;
-
-    x.size = n_states;
-    x.set(integrator.ode.x_0);
-    error.size = n_states;
-    for(i = 0; i < N_VECTORS; i++) {
-      vector[i] = new Vector();
-      vector[i].size = n_states;
-    }
-  }
 }

@@ -6,9 +6,14 @@
  */
 
 public class Flow.Solver : GLib.Object {
-  public double tolerance { get; set; }
+  protected double _tolerance;
+
+  public double tolerance {
+    get { return _tolerance; }
+    set { _tolerance = value; }
+  }
 
   construct {
-    tolerance = 0.0001;
+    _tolerance = 0.0001;
   }
 }

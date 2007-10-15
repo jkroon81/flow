@@ -6,5 +6,9 @@
  */
 
 public class Flow.ODESolver : Solver {
-  public ODE ode { get; set; }
+  protected ODE _ode;
+
+  public ODE ode {
+    set { _ode = value; }
+  }
 }

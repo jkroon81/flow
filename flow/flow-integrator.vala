@@ -14,23 +14,23 @@ public class Flow.Integrator : ODESolver {
     double h;
     double local_error;
 
-    step_method.prepare(ode.n_states);
-    t = ode.t_start;
+    step_method.ode = _ode;
+    t = _ode.t_start;
     h = 1.0;
 
-    while(t < ode.t_stop) {
+    while(t < _ode.t_stop) {
       step_method.estimate_error(t, h);
       local_error = step_method.error.norm_1();
-      if(local_error < tolerance) {
+      if(local_error < _tolerance) {
         step_method.estimate_x();
         t += h;
         // FIXME: Emit a signal once valac supports arrays
         //        as signal callback arguments.
-        for(i = 0; i < ode.n_states; i++)
-          GLib.stdout.printf("x%d = %f, ", i, step_method.x.get()[i]);
+        for(i = 0; i < _ode.x.size; i++)
+          GLib.stdout.printf("x%d = %f, ", i, _ode.x.get()[i]);
         GLib.stdout.printf("t = %f\n", t);
       }
-      h = 0.9 * h * GLib.Math.pow(tolerance / local_error, 1.0 / step_method.order);
+      h = 0.9 * h * GLib.Math.pow(_tolerance / local_error, 1.0 / step_method.order);
     }
   }
 }
