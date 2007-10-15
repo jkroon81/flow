@@ -31,6 +31,8 @@ public class Flow.Integrator : ODESolver {
         GLib.stdout.printf("t = %f\n", t);
       }
       h = 0.9 * h * GLib.Math.pow(_tolerance / local_error, 1.0 / step_method.order);
+      if(t + h > _ode.t_stop)
+        h = _ode.t_stop - t;
     }
   }
 }
