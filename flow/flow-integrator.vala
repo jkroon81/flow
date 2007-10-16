@@ -22,6 +22,11 @@ public class Flow.Integrator : ODESolver {
     t = _ode.t_start;
     h = 1.0;
 
+    // FIXME: Emit a signal once valac supports arrays
+    //        as signal callback arguments.
+    for(i = 0; i < _ode.x.size; i++)
+      GLib.stdout.printf("x%d = %f, ", i, _ode.x.get()[i]);
+    GLib.stdout.printf("t = %f\n", t);
     while(t < _ode.t_stop) {
       _step_method.estimate_error(t, h);
       local_error = _step_method.error.norm_1();
