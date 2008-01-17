@@ -8,6 +8,7 @@
 public abstract class Flow.ODE : GLib.Object {
   uint _n_f_evals;
   Vector _x;
+  Vector _u;
   public double t_start { get; set; }
   public double t_stop { get; set; }
 
@@ -19,14 +20,19 @@ public abstract class Flow.ODE : GLib.Object {
     get { return _x; }
   }
 
-  construct {
-    _x = new Vector();
+  public Vector u {
+    get { return _u; }
   }
 
-  public abstract void f_func(weak double[] dx, weak double[] x, double t);
+  construct {
+    _x = new Vector();
+    _u = new Vector();
+  }
 
-  public void eval_f (weak double[] dx, weak double[] x, double t) {
+  public abstract void f_func(weak double[] dx, weak double[] x, weak double[] u, double t);
+
+  public void eval_f (weak double[] dx, weak double[] x, weak double[] u, double t) {
     _n_f_evals++;
-    f_func(dx, x, t);
+    f_func(dx, x, u, t);
   }
 }

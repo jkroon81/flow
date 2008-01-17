@@ -8,7 +8,7 @@ public class LinearTestEquation : FlowDemoODE {
     t_stop = 10.0;
   }
 
-  public override void f_func(weak double[] dx, weak double[] x, double t) {
+  public override void f_func(weak double[] dx, weak double[] x, weak double[] u, double t) {
     dx[0] = -x[0];
   }
 }

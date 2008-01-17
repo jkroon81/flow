@@ -10,7 +10,7 @@ public class StiffPendulum : FlowDemoODE {
     t_stop = 10.0;
   }
 
-  public override void f_func(weak double[] dx, weak double[] x, double t) {
+  public override void f_func(weak double[] dx, weak double[] x, weak double[] u, double t) {
     double lambda;
 
     lambda = C*(GLib.Math.sqrt(x[0]*x[0]+x[1]*x[1])-1)/GLib.Math.sqrt(x[0]*x[0]+x[1]*x[1]);
