@@ -5,10 +5,15 @@
  *   Jacob Kroon <jacob.kroon@gmail.com>
  */
 
-public class Flow.ODE : GLib.Object {
+public abstract class Flow.ODE : GLib.Object {
+  uint _n_f_evals;
   Vector _x;
   public double t_start { get; set; }
   public double t_stop { get; set; }
+
+  public uint n_f_evals {
+    get { return _n_f_evals; }
+  }
 
   public Vector x {
     get { return _x; }
@@ -21,6 +26,7 @@ public class Flow.ODE : GLib.Object {
   public abstract void f_func(weak double[] dx, weak double[] x, double t);
 
   public void eval_f (weak double[] dx, weak double[] x, double t) {
+    _n_f_evals++;
     f_func(dx, x, t);
   }
 }
