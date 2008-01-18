@@ -6,56 +6,70 @@
  */
 
 public class Flow.Vector : GLib.Object {
+  [NoArrayLength]
   double[] _x;
+  uint _size;
 
-  public int size {
-    get { return _x.length; }
+  public uint size {
+    get { return _size; }
     set {
-      if(_x.length != value)
-        _x = new double[value];
+      if(_size != value) {
+        _size = value;
+        _x = new double[_size];
+      }
     }
   }
 
+  [NoArrayLength]
   public weak double[] get () {
     return _x;
   }
 
-  public void set (weak double[] x) {
-    if(_x.length != x.length)
-      _x = new double[x.length];
-    GLib.Memory.copy(_x, x, _x.length * sizeof(double));
+  [NoArrayLength]
+  public void set (uint size, weak double[] x) {
+    if(_size != size) {
+      _size = size;
+      _x = new double[_size];
+    }
+    GLib.Memory.copy(_x, x, _size * sizeof(double));
   }
 
   public void copy(Vector v) {
-    if(_x.length != v._x.length)
-      _x = new double[v._x.length];
-    GLib.Memory.copy(_x, v._x, _x.length * sizeof(double));
+    if(_size != v._size) {
+      _size = v._size;
+      _x = new double[_size];
+    }
+    GLib.Memory.copy(_x, v._x, _size * sizeof(double));
   }
 
   public void mul(Vector v, double s) {
-    int i;
+    uint i;
 
-    if(_x.length != v._x.length)
-      _x = new double[v._x.length];
-    for(i = 0; i < _x.length; i++)
+    if(_size != v._size) {
+      _size = v._size;
+      _x = new double[_size];
+    }
+    for(i = 0; i < _size; i++)
       _x[i] = v._x[i] * s;
   }
 
   public void add(Vector v1, Vector v2) {
-    int i;
+    uint i;
 
-    GLib.assert(v1._x.length == v2._x.length);
-    if(_x.length != v1._x.length)
-      _x = new double[v1._x.length];
-    for(i = 0; i < _x.length; i++)
+    GLib.assert(v1._size == v2._size);
+    if(_size != v1._size) {
+      _size = v1._size;
+      _x = new double[_size];
+    }
+    for(i = 0; i < _size; i++)
       _x[i] = v1._x[i] + v2._x[i];
   }
 
   public double norm_1 () {
-    int i;
+    uint i;
     double retval = 0.0;
 
-    for(i = 0; i < _x.length; i++)
+    for(i = 0; i < _size; i++)
       retval += (_x[i] > 0.0 ? _x[i] : -_x[i]);
     return retval;
   }

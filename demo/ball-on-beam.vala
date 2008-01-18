@@ -16,12 +16,13 @@ public class BallOnBeam : FlowDemoODE {
     var u_0 = new double[] {1.0};
 
     _name = "Ball On Beam";
-    x.set(x_0);
-    u.set(u_0);
+    x.set(6, x_0);
+    u.set(1, u_0);
     t_start = 0.0;
     t_stop = 50.0;
   }
 
+  [NoArrayLength]
   public override void f_func(weak double[] dx, weak double[] x, weak double[] u, double t) {
     double x5_dot;
 

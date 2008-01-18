@@ -37,6 +37,7 @@ public class Flow.Integrator : ODESolver {
     h = 1.0;
     data = new ODESample();
     data.x = _ode.x.get();
+    data.n_states = _ode.x.size;
     data.error = 0.0;
     data.t = t;
     sample(data);

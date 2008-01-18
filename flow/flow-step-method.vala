@@ -8,6 +8,7 @@
 public abstract class Flow.StepMethod : GLib.Object {
   int N_VECTORS = 10;
   protected Vector _error;
+  [NoArrayLength]
   protected Vector[] _vector;
   protected ODE _ode;
   protected int _order;

@@ -29,8 +29,10 @@ public abstract class Flow.ODE : GLib.Object {
     _u = new Vector();
   }
 
+  [NoArrayLength]
   public abstract void f_func(weak double[] dx, weak double[] x, weak double[] u, double t);
 
+  [NoArrayLength]
   public void eval_f (weak double[] dx, weak double[] x, weak double[] u, double t) {
     _n_f_evals++;
     f_func(dx, x, u, t);

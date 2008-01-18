@@ -5,11 +5,12 @@ public class StiffPendulum : FlowDemoODE {
     var x_0 = new double[] {0.9, 0.1, 0.0, 0.0};
 
     _name = "Stiff Pendulum";
-    x.set(x_0);
+    x.set(4, x_0);
     t_start = 0.0;
     t_stop = 10.0;
   }
 
+  [NoArrayLength]
   public override void f_func(weak double[] dx, weak double[] x, weak double[] u, double t) {
     double lambda;
 
