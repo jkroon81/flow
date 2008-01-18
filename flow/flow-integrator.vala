@@ -5,12 +5,6 @@
  *   Jacob Kroon <jacob.kroon@gmail.com>
  */
 
-public class Flow.SampleData {
-  public weak double[] x;
-  public double error;
-  public double t;
-}
-
 public class Flow.Integrator : ODESolver {
   uint _n_successful_steps;
   uint _n_failed_steps;
@@ -28,10 +22,10 @@ public class Flow.Integrator : ODESolver {
     set { _step_method = value; }
   }
 
-  public signal void sample (SampleData data);
+  public signal void sample (ODESample data);
 
   public void run() {
-    SampleData data;
+    ODESample data;
     double t;
     double h;
     double local_error;
@@ -41,7 +35,7 @@ public class Flow.Integrator : ODESolver {
     _step_method.ode = _ode;
     t = _ode.t_start;
     h = 1.0;
-    data = new SampleData();
+    data = new ODESample();
     data.x = _ode.x.get();
     data.error = 0.0;
     data.t = t;
