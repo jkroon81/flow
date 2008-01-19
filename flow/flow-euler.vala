@@ -15,12 +15,12 @@ public class Flow.Euler : StepMethod {
     weak Vector x_l = _vector[1];
     weak Vector dx = _vector[2];
 
-    _ode.eval_f(dx.get(), _ode.x.get(), _ode.u.get(), t);
+    _ode.eval_f(dx.get_data(), _ode.x.get_data(), _ode.u.get_data(), t);
     dx.mul(dx, h);
     x_l.add(_ode.x, dx);
     dx.mul(dx, 0.5);
     x_h.add(_ode.x, dx);
-    _ode.eval_f(dx.get(), x_h.get(), _ode.u.get(), t + h/2);
+    _ode.eval_f(dx.get_data(), x_h.get_data(), _ode.u.get_data(), t + h/2);
     dx.mul(dx, h/2);
     x_h.add(x_h, dx);
     _error.mul(x_h, -1.0);

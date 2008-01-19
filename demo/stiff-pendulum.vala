@@ -5,7 +5,7 @@ public class StiffPendulum : FlowDemoODE {
     var x_0 = new double[] {0.9, 0.1, 0.0, 0.0};
 
     _name = "Stiff Pendulum";
-    x.set(4, x_0);
+    x.set_data(4, x_0);
     t_start = 0.0;
     t_stop = 10.0;
   }

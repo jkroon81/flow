@@ -21,12 +21,12 @@ public class Flow.Vector : GLib.Object {
   }
 
   [NoArrayLength]
-  public weak double[] get () {
+  public weak double[] get_data () {
     return _x;
   }
 
   [NoArrayLength]
-  public void set (uint size, weak double[] x) {
+  public void set_data (uint size, weak double[] x) {
     if(_size != size) {
       _size = size;
       _x = new double[_size];

@@ -16,8 +16,8 @@ public class BallOnBeam : FlowDemoODE {
     var u_0 = new double[] {1.0};
 
     _name = "Ball On Beam";
-    x.set(6, x_0);
-    u.set(1, u_0);
+    x.set_data(6, x_0);
+    u.set_data(1, u_0);
     t_start = 0.0;
     t_stop = 50.0;
   }
