@@ -35,4 +35,3 @@ public class BallOnBeam : FlowDemoODE {
     dx[5] = x5_dot;
   }
 }
-

@@ -26,37 +26,32 @@ public class Flow.Integrator : ODESolver {
 
   public void run() {
     ODESample data;
-    double t;
     double h;
     double local_error;
 
     _n_successful_steps = 0;
     _n_failed_steps = 0;
     _step_method.ode = _ode;
-    t = _ode.t_start;
     h = 1.0;
     data = new ODESample();
     data.x = _ode.x.get_data();
-    data.n_states = _ode.x.size;
-    data.error = 0.0;
-    data.t = t;
+    data.size = _ode.x.size;
+    data.t = _ode.t_start;
     sample(data);
-    while(t < _ode.t_stop) {
-      _step_method.estimate_error(t, h);
+    while(data.t < _ode.t_stop) {
+      _step_method.estimate_error(data.t, h);
       local_error = _step_method.error.norm_1();
       if(local_error < _tolerance) {
         _n_successful_steps++;
         _step_method.estimate_x();
-        t += h;
-        data.error = local_error;
-        data.t = t;
+        data.t += h;
         sample(data);
       } else {
         _n_failed_steps++;
       }
       h = 0.9 * h * GLib.Math.pow(_tolerance / local_error, 1.0 / _step_method.order);
-      if(t + h > _ode.t_stop)
-        h = _ode.t_stop - t;
+      if(data.t + h > _ode.t_stop)
+        h = _ode.t_stop - data.t;
     }
   }
 }

@@ -8,7 +8,6 @@
 public class Flow.ODESample {
   [NoArrayLength]
   public weak double[] x;
-  public uint n_states;
-  public double error;
+  public uint size;
   public double t;
 }

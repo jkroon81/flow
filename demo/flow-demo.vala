@@ -56,7 +56,7 @@ class FlowDemo : Object {
     integrator.sample += (integrator, data) => {
       int i;
 
-      for(i = 0; i < data.n_states; i++)
+      for(i = 0; i < data.size; i++)
         stdout.printf("x%d = %f, ", i, data.x[i]);
       stdout.printf("t = %f\n", data.t);
     };
