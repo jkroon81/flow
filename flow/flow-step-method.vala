@@ -26,9 +26,9 @@ public abstract class Flow.StepMethod : GLib.Object {
       int i;
 
       _ode = value;
-      _error.size = _ode.x.size;
+      _error.set_size(_ode.x.get_size());
       for(i = 0; i < N_VECTORS; i++)
-        _vector[i].size = _ode.x.size;
+        _vector[i].set_size(_ode.x.get_size());
     }
   }
 

@@ -5,18 +5,19 @@
  *   Jacob Kroon <jacob.kroon@gmail.com>
  */
 
-public class Flow.Vector : GLib.Object {
+public class Flow.Vector {
   [NoArrayLength]
   double[] _x;
   uint _size;
 
-  public uint size {
-    get { return _size; }
-    set {
-      if(_size != value) {
-        _size = value;
-        _x = new double[_size];
-      }
+  public uint get_size() {
+    return _size;
+  }
+
+  public void set_size(uint size) {
+    if(_size != size) {
+      _size = size;
+      _x = new double[_size];
     }
   }
 
@@ -26,15 +27,15 @@ public class Flow.Vector : GLib.Object {
   }
 
   [NoArrayLength]
-  public void set_data (uint size, weak double[] x) {
+  public void set_data(uint size, weak double[] x) {
     if(_size != size)
-      this.size = size;
+      set_size(size);
     GLib.Memory.copy(_x, x, _size * sizeof(double));
   }
 
   public void copy(Vector v) {
     if(_size != v._size)
-      size = v._size;
+      set_size(v._size);
     GLib.Memory.copy(_x, v._x, _size * sizeof(double));
   }
 
@@ -42,7 +43,7 @@ public class Flow.Vector : GLib.Object {
     uint i;
 
     if(_size != v._size)
-      size = v._size;
+      set_size(v._size);
     for(i = 0; i < _size; i++)
       _x[i] = v._x[i] * s;
   }
@@ -52,7 +53,7 @@ public class Flow.Vector : GLib.Object {
 
     GLib.assert(v1._size == v2._size);
     if(_size != v1._size)
-      size = v1._size;
+      set_size(v1._size);
     for(i = 0; i < _size; i++)
       _x[i] = v1._x[i] + v2._x[i];
   }
