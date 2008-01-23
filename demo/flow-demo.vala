@@ -19,6 +19,7 @@ class FlowDemo : Object {
 
   public int run(string[] args) {
     Flow.Integrator integrator;
+    Flow.StepMethod step_method;
     Flags flags;
     int ode_id;
     int i;
@@ -45,13 +46,19 @@ class FlowDemo : Object {
     for(i = 2; i < args.length; i++)
       if(args[i] == "--print-stats")
         flags |= Flags.PRINT_STATS;
-      else {
+      else if(args[i] == "--step-method") {
+        i++;
+        if(args[i] == "euler")
+          step_method = new Flow.Euler();
+        else if(args[i] == "dopri")
+          step_method = new Flow.Dopri();
+      } else {
         print_help();
         return 0;
       }
 
     integrator = new Flow.Integrator();
-    integrator.step_method = new Flow.Euler();
+    integrator.step_method = step_method != null ? step_method : new Flow.Dopri();
     integrator.ode = ode[ode_id - 1];
     integrator.sample += (integrator, data) => {
       int i;

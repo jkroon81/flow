@@ -33,6 +33,13 @@ public class Flow.Vector {
     GLib.Memory.copy(_x, x, _size * sizeof(double));
   }
 
+  public void set_null() {
+    uint i;
+
+    for(i = 0; i < _size; i++)
+      _x[i] = 0.0;
+  }
+
   public void copy(Vector v) {
     if(_size != v._size)
       set_size(v._size);

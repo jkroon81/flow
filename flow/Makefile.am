@@ -2,11 +2,13 @@ CLEANFILES      = flow.vala flow.vapi *~
 lib_LTLIBRARIES = libflow.la
 
 libflow_la_SOURCES =                                 \
+	flow-dopri.vala                              \
 	flow-euler.vala                              \
 	flow-integrator.vala                         \
 	flow-ode.vala                                \
 	flow-ode-sample.vala                         \
 	flow-ode-solver.vala                         \
+	flow-rungekutta-explicit.vala                \
 	flow-solver.vala                             \
 	flow-step-method.vala                        \
 	flow-vector.vala
