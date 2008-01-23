@@ -11,22 +11,35 @@ flow_demo_SOURCES =                                \
 	step.vala                                  \
 	stiff-pendulum.vala
 
+flow_demo_VALAFLAGS =                              \
+	--vapidir=/opt/vala-svn/share/vala/vapi    \
+	--vapidir=$(top_builddir)/flow             \
+	--pkg=flow
+
+flow_demo_CFLAGS =                                 \
+	@GOBJECT_CFLAGS@                           \
+	-I$(top_builddir)
+
+flow_demo_LDADD =                                  \
+	@GOBJECT_LIBS@                             \
+	$(top_builddir)/flow/libflow.la
+
 gtk_ball_on_beam_SOURCES =                         \
 	ball-on-beam.vala                          \
 	flow-demo-ode.vala                         \
 	gtk-ball-on-beam.vala
 
-VALAFLAGS =                                        \
+gtk_ball_on_beam_VALAFLAGS =                       \
 	--vapidir=/opt/vala-svn/share/vala/vapi    \
 	--vapidir=$(top_builddir)/flow             \
-	--pkg=flow --pkg=gtk+-2.0
+	--pkg=gtk+-2.0                             \
+	--pkg=flow
 
-INCLUDES =                                         \
-	@GOBJECT_CFLAGS@                           \
+gtk_ball_on_beam_CFLAGS =                          \
 	@GTK_CFLAGS@                               \
 	-I$(top_builddir)
 
-LDADD =                                            \
+gtk_ball_on_beam_LDADD =                           \
 	@GTK_LIBS@                                 \
 	$(top_builddir)/flow/libflow.la
 
