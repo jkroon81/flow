@@ -3,7 +3,7 @@
 *.h
 *.lo
 *.o
-*.vala-stamp
+*.valastamp
 .deps
 .libs
 Makefile
