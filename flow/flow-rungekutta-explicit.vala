@@ -1,5 +1,5 @@
 /*
- * Flow - Copyright (C) 2007 Jacob Kroon
+ * Flow - Copyright (C) 2007-2008 Jacob Kroon
  *
  * Contributor(s):
  *   Jacob Kroon <jacob.kroon@gmail.com>
