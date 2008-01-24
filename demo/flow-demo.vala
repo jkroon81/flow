@@ -44,9 +44,9 @@ class FlowDemo : Object {
 
     flags = Flags.NONE;
     for(i = 2; i < args.length; i++)
-      if(args[i] == "--print-stats")
+      if(args[i] == "--stats")
         flags |= Flags.PRINT_STATS;
-      else if(args[i] == "--step-method") {
+      else if(args[i] == "--method") {
         i++;
         if(args[i] == "euler")
           step_method = new Flow.Euler();
@@ -70,9 +70,9 @@ class FlowDemo : Object {
     integrator.run();
 
     if ((flags & Flags.PRINT_STATS) != 0) {
-      stdout.printf("Number of F-evaluations: %d\n", ode[ode_id - 1].n_f_evals);
-      stdout.printf("Number of successful steps: %d\n", integrator.n_successful_steps);
-      stdout.printf("Number of failed steps: %d\n", integrator.n_failed_steps);
+      stdout.printf("%d F-evaluations\n", ode[ode_id - 1].n_f_evals);
+      stdout.printf("%d successful steps\n", integrator.n_successful_steps);
+      stdout.printf("%d failed steps\n", integrator.n_failed_steps);
     }
 
     return 0;
