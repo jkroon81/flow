@@ -10,6 +10,7 @@ libflow_la_SOURCES =                                 \
 	flow-ode-solver.vala                         \
 	flow-rungekutta-explicit.vala                \
 	flow-solver.vala                             \
+	flow-spline.vala                             \
 	flow-step-method.vala                        \
 	flow-vector.vala
 
