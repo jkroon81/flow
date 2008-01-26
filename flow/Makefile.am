@@ -6,7 +6,6 @@ libflow_la_SOURCES =                                 \
 	flow-euler.vala                              \
 	flow-integrator.vala                         \
 	flow-ode.vala                                \
-	flow-ode-sample.vala                         \
 	flow-ode-solver.vala                         \
 	flow-rungekutta-explicit.vala                \
 	flow-solver.vala                             \

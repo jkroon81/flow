@@ -11,6 +11,7 @@ public abstract class Flow.ODE : GLib.Object {
   Vector _u;
   public double t_start { get; set; }
   public double t_stop { get; set; }
+  public double t { get; set; }
 
   public uint n_f_evals {
     get { return _n_f_evals; }

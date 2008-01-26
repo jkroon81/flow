@@ -60,12 +60,12 @@ class FlowDemo : Object {
     integrator = new Flow.Integrator();
     integrator.step_method = step_method != null ? step_method : new Flow.Dopri();
     integrator.ode = ode[ode_id - 1];
-    integrator.sample += (integrator, data) => {
+    integrator.sample += (integrator, ode) => {
       int i;
 
-      for(i = 0; i < data.size; i++)
-        stdout.printf("x%d = %f, ", i, data.x[i]);
-      stdout.printf("t = %f\n", data.t);
+      for(i = 0; i < ode.x.get_size(); i++)
+        stdout.printf("x%d = %f, ", i, ode.x.get_data()[i]);
+      stdout.printf("t = %f\n", ode.t);
     };
     integrator.run();
 
