@@ -7,7 +7,6 @@
 
 public abstract class Flow.StepMethod : GLib.Object {
   int N_VECTORS = 10;
-  protected Vector _error;
   [NoArrayLength]
   protected Vector[] _vector;
   protected ODE _ode;
@@ -17,16 +16,11 @@ public abstract class Flow.StepMethod : GLib.Object {
     get { return _order; }
   }
 
-  public Vector error {
-    get { return _error; }
-  }
-
   public ODE ode {
     set {
       int i;
 
       _ode = value;
-      _error.set_size(_ode.x.get_size());
       for(i = 0; i < N_VECTORS; i++)
         _vector[i].set_size(_ode.x.get_size());
     }
@@ -35,12 +29,11 @@ public abstract class Flow.StepMethod : GLib.Object {
   construct {
     int i;
 
-    _error = new Vector();
     _vector = new Vector[N_VECTORS];
     for(i = 0; i < N_VECTORS; i++)
       _vector[i] = new Vector();
   }
 
-  public abstract void estimate_error (double t, double h);
-  public abstract void estimate_x ();
+  public abstract weak Vector estimate_error(double h);
+  public abstract void step();
 }

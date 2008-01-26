@@ -35,11 +35,10 @@ public class Flow.Integrator : ODESolver {
     sample(_ode);
     h = 1.0;
     while(_ode.t < _ode.t_stop) {
-      _step_method.estimate_error(_ode.t, h);
-      local_error = _step_method.error.norm_1();
+      local_error = _step_method.estimate_error(h).norm_1();
       if(local_error < _tolerance) {
         _n_successful_steps++;
-        _step_method.estimate_x();
+        _step_method.step();
         _ode.t += h;
         sample(_ode);
       } else {
