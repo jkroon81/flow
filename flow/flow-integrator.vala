@@ -32,14 +32,17 @@ public class Flow.Integrator : ODESolver {
     _n_failed_steps = 0;
     _step_method.ode = _ode;
     _ode.t = _ode.t_start;
+    _ode.dx.set_size(_ode.x.get_size());
+    _ode.u.set_size(_ode.x.get_size());
+    _ode.eval_f(_ode.dx.get_data(), _ode.x.get_data(), _ode.u.get_data(), _ode.t);
     sample(_ode);
     h = 1.0;
     while(_ode.t < _ode.t_stop) {
-      local_error = _step_method.estimate_error(h).norm_1();
+      _step_method.h = h;
+      local_error = _step_method.estimate_error().norm_1();
       if(local_error < _tolerance) {
         _n_successful_steps++;
         _step_method.step();
-        _ode.t += h;
         sample(_ode);
       } else {
         _n_failed_steps++;

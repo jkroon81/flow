@@ -11,9 +11,14 @@ public abstract class Flow.StepMethod : GLib.Object {
   protected Vector[] _vector;
   protected ODE _ode;
   protected int _order;
+  protected double _h;
 
   public int order {
     get { return _order; }
+  }
+
+  public double h {
+    set { _h = value; }
   }
 
   public ODE ode {
@@ -34,6 +39,6 @@ public abstract class Flow.StepMethod : GLib.Object {
       _vector[i] = new Vector();
   }
 
-  public abstract weak Vector estimate_error(double h);
+  public abstract weak Vector estimate_error();
   public abstract void step();
 }
