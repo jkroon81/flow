@@ -73,4 +73,36 @@ public class Flow.Vector {
       retval += (_x[i] > 0.0 ? _x[i] : -_x[i]);
     return retval;
   }
+
+  public void interpolate(Vector v1,
+                          Vector v2,
+                          Vector dv1,
+                          Vector dv2,
+                          double t1,
+                          double t2,
+                          double t)
+  {
+    /* See http://en.wikipedia.org/wiki/Cubic_Hermite_spline */
+    Vector temp;
+    double[] c;
+
+    GLib.assert(v1._size == v2._size);
+    GLib.assert(v1._size == dv1._size);
+    GLib.assert(v1._size == dv2._size);
+    temp = new Vector();
+    c = new double[4];
+    t = (t - t1) / (t2 - t1);
+    c[0] = 2*t*t*t - 3*t*t + 1;
+    c[1] = t*t*t - 2*t*t + t;
+    c[2] = -2*t*t*t + 3*t*t;
+    c[3] = t*t*t - t*t;
+    temp.mul(v1, c[0]);
+    copy(temp);
+    temp.mul(dv1, c[1]);
+    add(temp, this);
+    temp.mul(v2, c[2]);
+    add(temp, this);
+    temp.mul(dv2, c[3]);
+    add(temp, this);
+  }
 }

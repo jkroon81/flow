@@ -2,7 +2,7 @@ CLEANFILES      = *~
 noinst_PROGRAMS =                                  \
 	flow-demo                                  \
 	gtk-ball-on-beam                           \
-	test-spline
+	interpolate
 
 flow_demo_SOURCES =                                \
 	ball-on-beam.vala                          \
@@ -44,19 +44,19 @@ gtk_ball_on_beam_LDADD =                           \
 	@GTK_LIBS@                                 \
 	$(top_builddir)/flow/libflow.la
 
-test_spline_SOURCES =                              \
-	test-spline.vala
+interpolate_SOURCES =                              \
+	interpolate.vala
 
-test_spline_VALAFLAGS =                            \
+interpolate_VALAFLAGS =                            \
 	--vapidir=/opt/vala-svn/share/vala/vapi    \
 	--vapidir=$(top_builddir)/flow             \
 	--pkg=flow
 
-test_spline_CFLAGS =                               \
+interpolate_CFLAGS =                               \
 	@GOBJECT_CFLAGS@                           \
 	-I$(top_builddir)
 
-test_spline_LDADD =                                \
+interpolate_LDADD =                                \
 	@GOBJECT_LIBS@                             \
 	$(top_builddir)/flow/libflow.la
 
