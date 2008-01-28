@@ -6,6 +6,7 @@ noinst_PROGRAMS =                                  \
 
 flow_demo_SOURCES =                                \
 	ball-on-beam.vala                          \
+	constant.vala                              \
 	flow-demo.vala                             \
 	flow-demo-ode.vala                         \
 	linear-test-equation.vala                  \

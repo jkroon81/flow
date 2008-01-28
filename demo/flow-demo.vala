@@ -27,6 +27,7 @@ class FlowDemo : Object {
 
     ode = new FlowDemoODE[] {
       new BallOnBeam(),
+      new Constant(),
       new LinearTestEquation(),
       new Step(),
       new StiffPendulum()
