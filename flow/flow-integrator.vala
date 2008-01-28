@@ -48,8 +48,8 @@ public class Flow.Integrator : ODESolver {
     double t_sample;
     double t_prev;
     double t_next;
-    double h_sample;
     double h;
+    uint n;
 
     _n_successful_steps = 0;
     _n_failed_steps = 0;
@@ -63,19 +63,19 @@ public class Flow.Integrator : ODESolver {
     x2 = new Vector();
     dx1 = new Vector();
     dx2 = new Vector();
-    _step_method.h = 1.0;
-    local_error = _step_method.estimate_error().norm_1();
-    h = 0.9 * GLib.Math.pow(_tolerance / local_error, 1.0 / _step_method.order);
-    x1.copy(_ode.x);
-    dx1.mul(_ode.dx, h);
-    h_sample = (_ode.t_stop - _ode.t_start) / _n_samples;
-    t_prev = _ode.t_start;
-    t_sample = t_prev + h_sample;
-    while(_ode.t < _ode.t_stop) {
+    h = 1.0;
+    n = 1;
+    t_sample = _ode.t_start + (_ode.t_stop - _ode.t_start) * n++ / _n_samples;
+    do {
       _step_method.h = h;
       local_error = _step_method.estimate_error().norm_1();
       if(local_error < _tolerance) {
         _n_successful_steps++;
+        if(_uniform_sampling) {
+          t_prev = _ode.t;
+          x1.copy(_ode.x);
+          dx1.mul(_ode.dx, h);
+        }
         _step_method.step();
         if(_uniform_sampling) {
           t_next = _ode.t;
@@ -85,20 +85,17 @@ public class Flow.Integrator : ODESolver {
             _ode.t = t_sample;
             _ode.x.interpolate(x1, x2, dx1, dx2, t_prev, t_next, t_sample);
             sample(ode);
-            t_sample += h_sample;
+            t_sample = _ode.t_start + (_ode.t_stop - _ode.t_start) * n++ / _n_samples;
           }
-          _ode.t = t_prev = t_next;
-          x1.copy(x2);
-          dx1.copy(dx2);
+          _ode.t = t_next;
           _ode.x.copy(x2);
         } else
           sample(_ode);
-      } else {
+      } else
         _n_failed_steps++;
-      }
       h = 0.9 * h * GLib.Math.pow(_tolerance / local_error, 1.0 / _step_method.order);
       if(_ode.t + h > _ode.t_stop)
         h = _ode.t_stop - _ode.t;
-    }
+    } while(_ode.t < _ode.t_stop);
   }
 }
