@@ -2,7 +2,8 @@ using GLib;
 
 enum Flags {
   NONE        = 0,
-  PRINT_STATS = 1 << 0
+  PRINT_STATS = 1 << 0,
+  NON_UNIFORM = 1 << 1,
 }
 
 class FlowDemo : Object {
@@ -46,6 +47,8 @@ class FlowDemo : Object {
     for(i = 2; i < args.length; i++)
       if(args[i] == "--stats")
         flags |= Flags.PRINT_STATS;
+      else if(args[i] == "--non-uniform")
+        flags |= Flags.NON_UNIFORM;
       else if(args[i] == "--method") {
         i++;
         if(args[i] == "euler")
@@ -58,6 +61,7 @@ class FlowDemo : Object {
       }
 
     integrator = new Flow.Integrator();
+    integrator.uniform_sampling = (flags & Flags.NON_UNIFORM) == 0;
     integrator.step_method = step_method != null ? step_method : new Flow.Dopri();
     integrator.ode = ode[ode_id - 1];
     integrator.sample += (integrator, ode) => {
