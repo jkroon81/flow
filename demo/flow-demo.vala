@@ -29,6 +29,7 @@ class FlowDemo : Object {
       new BallOnBeam(),
       new Constant(),
       new LinearTestEquation(),
+      new Lorentz(),
       new Step(),
       new StiffPendulum()
     };

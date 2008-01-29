@@ -10,6 +10,7 @@ flow_demo_SOURCES =                                \
 	flow-demo.vala                             \
 	flow-demo-ode.vala                         \
 	linear-test-equation.vala                  \
+	lorentz.vala                               \
 	step.vala                                  \
 	stiff-pendulum.vala
 
