@@ -20,16 +20,15 @@ public class Flow.RungekuttaExplicit : StepMethod {
     uint i;
     uint j;
 
-    error.set_null();
-    for(i = 0; i < _n_stages; i++) {
+    /* NOTE: _c[0] must always be zero */
+    k[0].mul(_ode.dx, _h);
+    error.mul(k[0], _b2[0] - _b1[0]);
+    for(i = 1; i < _n_stages; i++) {
       temp.copy(_ode.x);
       for(j = 0; j < i; j++) {
         dx.mul(k[j], _a[(i-1)*(_n_stages-1)+j]);
         temp.add(temp, dx);
       }
-      /* FIXME: The first F-eval is most likely unneccessary since _c[0] = 0.0
-       * in most cases, and _ode.dx is always up-to-date with respect to _ode.x.
-       */
       _ode.eval_f(dx.get_data(), temp.get_data(), _ode.u.get_data(), _ode.t + _c[i]*_h);
       k[i].mul(dx, _h);
       temp.mul(k[i], _b2[i] - _b1[i]);
