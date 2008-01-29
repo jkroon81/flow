@@ -40,10 +40,7 @@ public class Flow.Integrator : ODESolver {
   }
 
   public void run() {
-    Vector x1;
-    Vector x2;
-    Vector dx1;
-    Vector dx2;
+    Vector[] tmp;
     double local_error;
     double t_sample;
     double t_prev;
@@ -59,10 +56,11 @@ public class Flow.Integrator : ODESolver {
     _ode.u.set_size(_ode.x.get_size());
     _ode.eval_f(_ode.dx.get_data(), _ode.x.get_data(), _ode.u.get_data(), _ode.t);
     sample(_ode);
-    x1 = new Vector();
-    x2 = new Vector();
-    dx1 = new Vector();
-    dx2 = new Vector();
+    if(_uniform_sampling) {
+      tmp = new Vector[4];
+      for(n = 0; n < 4; n++)
+        tmp[n] = new Vector();
+    }
     h = 1.0;
     n = 1;
     t_sample = _ode.t_start + (_ode.t_stop - _ode.t_start) * n++ / _n_samples;
@@ -73,22 +71,22 @@ public class Flow.Integrator : ODESolver {
         _n_successful_steps++;
         if(_uniform_sampling) {
           t_prev = _ode.t;
-          x1.copy(_ode.x);
-          dx1.mul(_ode.dx, h);
+          tmp[0].copy(_ode.x);
+          tmp[2].mul(_ode.dx, h);
         }
         _step_method.step();
         if(_uniform_sampling) {
           t_next = _ode.t;
-          x2.copy(_ode.x);
-          dx2.mul(_ode.dx, h);
+          tmp[1].copy(_ode.x);
+          tmp[3].mul(_ode.dx, h);
           while(t_sample < t_next) {
             _ode.t = t_sample;
-            _ode.x.interpolate(x1, x2, dx1, dx2, t_prev, t_next, t_sample);
+            _ode.x.interpolate(tmp[0], tmp[1], tmp[2], tmp[3], t_prev, t_next, t_sample);
             sample(ode);
             t_sample = _ode.t_start + (_ode.t_stop - _ode.t_start) * n++ / _n_samples;
           }
           _ode.t = t_next;
-          _ode.x.copy(x2);
+          _ode.x.copy(tmp[1]);
         } else
           sample(_ode);
       } else
