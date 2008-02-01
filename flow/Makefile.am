@@ -1,4 +1,4 @@
-CLEANFILES      = flow.vala flow.vapi *~
+CLEANFILES      = flow.vapi *~
 lib_LTLIBRARIES = libflow.la
 
 libflow_la_SOURCES =                                 \
