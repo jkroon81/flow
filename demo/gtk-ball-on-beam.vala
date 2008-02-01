@@ -40,7 +40,7 @@ class GtkBallOnBeam : Window {
     GLib.Timeout.add(50, refresh_cb, this);
 
     integrator = new Integrator();
-    integrator.step_method = new Euler();
+    integrator.step_method = new Dopri();
     integrator.ode = new BallOnBeam();
 
     u = new double[1];
