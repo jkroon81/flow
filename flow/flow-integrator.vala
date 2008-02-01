@@ -42,6 +42,7 @@ public class Flow.Integrator : ODESolver {
   public void run() {
     Vector[] tmp;
     double local_error;
+    double t_total;
     double t_sample;
     double t_prev;
     double t_next;
@@ -63,7 +64,8 @@ public class Flow.Integrator : ODESolver {
     }
     h = 1.0;
     n = 1;
-    t_sample = _ode.t_start + (_ode.t_stop - _ode.t_start) * n++ / _n_samples;
+    t_total = _ode.t_stop - _ode.t_start;
+    t_sample = _ode.t_start + t_total * n++ / _n_samples;
     while(true) {
       if(_ode.t + h > _ode.t_stop) {
         h = _ode.t_stop - _ode.t;
@@ -88,7 +90,7 @@ public class Flow.Integrator : ODESolver {
             _ode.t = t_sample;
             _ode.x.interpolate(tmp[0], tmp[1], tmp[2], tmp[3], t_prev, t_next, t_sample);
             sample(ode);
-            t_sample = _ode.t_start + (_ode.t_stop - _ode.t_start) * n++ / _n_samples;
+            t_sample = _ode.t_start + t_total * n++ / _n_samples;
           }
           _ode.t = t_next;
           _ode.x.copy(tmp[1]);
@@ -100,5 +102,7 @@ public class Flow.Integrator : ODESolver {
         _n_failed_steps++;
       h = 0.9 * h * GLib.Math.pow(_tolerance / local_error, 1.0 / _step_method.order);
     }
+    if(_uniform_sampling)
+      sample(_ode);
   }
 }
