@@ -22,7 +22,7 @@ flow_demo_VALAFLAGS =                              \
 
 flow_demo_CFLAGS =                                 \
 	@GOBJECT_CFLAGS@                           \
-	-I$(top_builddir)
+	-I$(top_builddir)/flow
 
 flow_demo_LDADD =                                  \
 	@GOBJECT_LIBS@                             \
@@ -41,7 +41,7 @@ gtk_ball_on_beam_VALAFLAGS =                       \
 
 gtk_ball_on_beam_CFLAGS =                          \
 	@GTK_CFLAGS@                               \
-	-I$(top_builddir)
+	-I$(top_builddir)/flow
 
 gtk_ball_on_beam_LDADD =                           \
 	@GTK_LIBS@                                 \
@@ -60,7 +60,7 @@ gtk_stiff_pendulum_VALAFLAGS =                     \
 
 gtk_stiff_pendulum_CFLAGS =                        \
 	@GTK_CFLAGS@                               \
-	-I$(top_builddir)
+	-I$(top_builddir)/flow
 
 gtk_stiff_pendulum_LDADD =                         \
 	@GTK_LIBS@                                 \
@@ -76,7 +76,7 @@ interpolate_VALAFLAGS =                            \
 
 interpolate_CFLAGS =                               \
 	@GOBJECT_CFLAGS@                           \
-	-I$(top_builddir)
+	-I$(top_builddir)/flow
 
 interpolate_LDADD =                                \
 	@GOBJECT_LIBS@                             \
