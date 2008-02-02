@@ -2,6 +2,7 @@ CLEANFILES      = *~
 noinst_PROGRAMS =                                  \
 	flow-demo                                  \
 	gtk-ball-on-beam                           \
+	gtk-stiff-pendulum                         \
 	interpolate
 
 flow_demo_SOURCES =                                \
@@ -43,6 +44,25 @@ gtk_ball_on_beam_CFLAGS =                          \
 	-I$(top_builddir)
 
 gtk_ball_on_beam_LDADD =                           \
+	@GTK_LIBS@                                 \
+	$(top_builddir)/flow/libflow.la
+
+gtk_stiff_pendulum_SOURCES =                       \
+	stiff-pendulum.vala                        \
+	flow-demo-ode.vala                         \
+	gtk-stiff-pendulum.vala
+
+gtk_stiff_pendulum_VALAFLAGS =                     \
+	--vapidir=/opt/vala-svn/share/vala/vapi    \
+	--vapidir=$(top_builddir)/flow             \
+	--pkg=gtk+-2.0                             \
+	--pkg=flow
+
+gtk_stiff_pendulum_CFLAGS =                        \
+	@GTK_CFLAGS@                               \
+	-I$(top_builddir)
+
+gtk_stiff_pendulum_LDADD =                         \
 	@GTK_LIBS@                                 \
 	$(top_builddir)/flow/libflow.la
 
