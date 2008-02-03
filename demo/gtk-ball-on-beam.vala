@@ -1,11 +1,14 @@
+using GLib;
+using Gdk;
 using Gtk;
 using Cairo;
 using Flow;
 
-class GtkBallOnBeam : Window {
+class GtkBallOnBeam : Gtk.Window {
   Widget vbox;
   Widget darea;
   Widget slider;
+  Timer timer;
   ODE ode;
   Integrator integrator;
   double[] u;
@@ -23,9 +26,7 @@ class GtkBallOnBeam : Window {
 
     darea = new DrawingArea();
     darea.set_size_request(400, 400);
-    darea.expose_event += (darea, foo) => {
-      expose_cb();
-    };
+    darea.expose_event += expose_cb;
 
     slider = new HScale.with_range(-0.8 * BEAM_LENGTH / 2, 0.8 * BEAM_LENGTH / 2, BEAM_LENGTH / 10);
     ((Range)slider).set_value(0.0);
@@ -37,28 +38,35 @@ class GtkBallOnBeam : Window {
     add(vbox);
     show_all();
 
-    GLib.Timeout.add(50, refresh_cb, this);
+    Timeout.add(1000 / 25, refresh_cb);
 
     integrator = new Integrator();
     integrator.step_method = new Dopri();
     integrator.ode = new BallOnBeam();
+    integrator.ode.t_stop = 0.0;
+
+    timer = new Timer();
+    timer.start();
 
     u = new double[1];
   }
 
-  void refresh_cb() {
+  bool refresh_cb() {
     u[0] = ((Range)slider).get_value();
     integrator.ode.t_start = integrator.ode.t_stop;
-    integrator.ode.t_stop = integrator.ode.t_start + 0.05;
+    integrator.ode.t_stop = timer.elapsed();
     integrator.ode.u.set_data(1, u);
     integrator.run();
     pos = integrator.ode.x.get_data()[3];
     angle = integrator.ode.x.get_data()[0];
     darea.queue_draw();
+    return true;
   }
 
-  void expose_cb() {
+  void expose_cb(DrawingArea darea, EventExpose e) {
     var cr = Gdk.cairo_create(darea.window);
+    cr.rectangle(e.area.x, e.area.y, e.area.width, e.area.height);
+    cr.clip();
     cr.set_line_width(1.0 / 400.0);
     cr.scale(400.0, 400.0);
     cr.translate(0.5, 0.5);
