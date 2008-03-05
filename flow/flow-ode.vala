@@ -5,7 +5,10 @@
  *   Jacob Kroon <jacob.kroon@gmail.com>
  */
 
-public abstract class Flow.ODE : GLib.Object {
+[NoArrayLength]
+public static delegate void Flow.FFunc (weak double[] dx, weak double[] x, weak double[] u, double t);
+
+public class Flow.ODE : GLib.Object {
   public double t_start { get; set; }
   public double t_stop  { get; set; }
   public double t       { get; set; }
@@ -13,15 +16,13 @@ public abstract class Flow.ODE : GLib.Object {
   public Vector dx      { get; private set; }
   public Vector x       { get; private set; }
   public Vector u       { get; private set; }
+  public FFunc f_func   { private get; set; }
 
   construct {
     dx = new Vector();
     x = new Vector();
     u = new Vector();
   }
-
-  [NoArrayLength]
-  public abstract void f_func(weak double[] dx, weak double[] x, weak double[] u, double t);
 
   [NoArrayLength]
   public void eval_f (weak double[] dx, weak double[] x, weak double[] u, double t) {
