@@ -6,38 +6,13 @@
  */
 
 public class Flow.Integrator : ODESolver {
-  uint _n_successful_steps;
-  uint _n_failed_steps;
-  uint _n_samples;
-  bool _uniform_sampling;
-  StepMethod _step_method;
-
-  public uint n_successful_steps {
-    get { return _n_successful_steps; }
-  }
-
-  public uint n_failed_steps {
-    get { return _n_failed_steps; }
-  }
-
-  public uint n_samples {
-    set { _n_samples = value; }
-  }
-
-  public bool uniform_sampling {
-    set { _uniform_sampling = value; }
-  }
-
-  public StepMethod step_method {
-    set { _step_method = value; }
-  }
+  public uint n_successful_steps { get; private set; }
+  public uint n_failed_steps     { get; private set; }
+  public uint n_samples          { private get; set construct; default(500); }
+  public bool uniform_sampling   { private get; set construct; default(false); }
+  public StepMethod step_method  { private get; set; }
 
   public signal void sample (ODE ode);
-
-  construct {
-    _uniform_sampling = false;
-    _n_samples = 500;
-  }
 
   public void run() {
     Vector[] tmp;

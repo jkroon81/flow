@@ -10,10 +10,7 @@ public class Flow.Solver : GLib.Object {
 
   public double tolerance {
     get { return _tolerance; }
-    set { _tolerance = value; }
-  }
-
-  construct {
-    _tolerance = 0.0001;
+    set construct { _tolerance = value; }
+    default(0.0001);
   }
 }
