@@ -18,13 +18,11 @@ public class Flow.Vector : GLib.Object {
     }
   }
 
-  [NoArrayLength]
-  public weak double[] get_data () {
+  public double* get_data () {
     return x;
   }
 
-  [NoArrayLength]
-  public void set_data(uint size, weak double[] x) {
+  public void set_data(uint size, double* x) {
     if(this.x.length != size)
       this.x = new double[size];
     GLib.Memory.copy(this.x, x, this.x.length * sizeof(double));

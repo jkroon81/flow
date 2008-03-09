@@ -6,10 +6,10 @@
  */
 
 public abstract class Flow.RungeKuttaExplicit : StepMethod {
-  [NoArrayLength] protected double[] c;
-  [NoArrayLength] protected double[] b1;
-  [NoArrayLength] protected double[] b2;
-  [NoArrayLength] protected double[] a;
+  protected double* c;
+  protected double* b1;
+  protected double* b2;
+  protected double* a;
   protected uint n_stages;
 
   public override Vector estimate_error() {

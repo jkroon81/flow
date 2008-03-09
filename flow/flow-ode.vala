@@ -5,8 +5,7 @@
  *   Jacob Kroon <jacob.kroon@gmail.com>
  */
 
-[NoArrayLength]
-public static delegate void Flow.FFunc (weak double[] dx, weak double[] x, weak double[] u, double t);
+public static delegate void Flow.FFunc (double* dx, double* x, double* u, double t);
 
 public class Flow.ODE : GLib.Object {
   public double t_start { get; set; }
@@ -24,8 +23,7 @@ public class Flow.ODE : GLib.Object {
     u = new Vector();
   }
 
-  [NoArrayLength]
-  public void eval_f (weak double[] dx, weak double[] x, weak double[] u, double t) {
+  public void eval_f (double* dx, double* x, double* u, double t) {
     n_f_evals++;
     f_func(dx, x, u, t);
   }
