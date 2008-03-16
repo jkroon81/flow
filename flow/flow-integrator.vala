@@ -29,7 +29,7 @@ public class Flow.Integrator : ODESolver {
     _n_failed_steps = 0;
     _step_method.ode = _ode;
     _ode.t = _ode.t_start;
-    _ode.dx.set_size(_ode.x.get_size());
+    _ode.dx.size = _ode.x.size;
     _ode.eval_f(_ode.dx.get_data(), _ode.x.get_data(), _ode.u.get_data(), _ode.t);
     sample(_ode);
     if(_uniform_sampling) {
