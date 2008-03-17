@@ -10,14 +10,14 @@ public abstract class Flow.ODE : GLib.Object {
   public double t_stop  { get; set; }
   public double t       { get; set; }
   public uint n_f_evals { get; private set; }
-  public Vector dx;
-  public Vector x;
-  public Vector u;
+  public Vector dx      { get; private set; }
+  public Vector x       { get; private set; }
+  public Vector u       { get; private set; }
 
   construct {
-    dx = new Vector();
-    x = new Vector();
-    u = new Vector();
+    _dx = new Vector();
+    _x = new Vector();
+    _u = new Vector();
   }
 
   [NoArrayLength]
