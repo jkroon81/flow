@@ -12,11 +12,11 @@ public class Flow.RungekuttaExplicit : StepMethod {
   [NoArrayLength] protected double[] _a;
   protected uint _n_stages;
 
-  public override weak Vector estimate_error() {
-    weak Vector[] k   = _vector;
-    weak Vector dx    = _vector[_n_stages];
-    weak Vector error = _vector[_n_stages+1];
-    weak Vector temp  = _vector[_n_stages+2];
+  public override Vector estimate_error() {
+    weak Vector[] k = _vector;
+    Vector dx    = _vector[_n_stages];
+    Vector error = _vector[_n_stages+1];
+    Vector temp  = _vector[_n_stages+2];
     uint i;
     uint j;
 

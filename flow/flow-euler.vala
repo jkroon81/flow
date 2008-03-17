@@ -10,11 +10,11 @@ public class Flow.Euler : StepMethod {
     _order = 2;
   }
 
-  public override weak Vector estimate_error() {
-    weak Vector x_h   = _vector[0];
-    weak Vector x_l   = _vector[1];
-    weak Vector dx    = _vector[2];
-    weak Vector error = _vector[3];
+  public override Vector estimate_error() {
+    Vector x_h   = _vector[0];
+    Vector x_l   = _vector[1];
+    Vector dx    = _vector[2];
+    Vector error = _vector[3];
 
     dx.mul(_ode.dx, _h);
     x_l.add(_ode.x, dx);

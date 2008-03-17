@@ -38,6 +38,6 @@ public abstract class Flow.StepMethod : GLib.Object {
       _vector[i] = new Vector();
   }
 
-  public abstract weak Vector estimate_error();
+  public abstract Vector estimate_error();
   public abstract void step();
 }
