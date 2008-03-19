@@ -1,5 +1,9 @@
-CLEANFILES      = flow.vapi *~
 lib_LTLIBRARIES = libflow.la
+
+CLEANFILES =                                         \
+	flow.gidl                                    \
+	flow.vapi                                    \
+	*~
 
 libflow_la_SOURCES =                                 \
 	flow-dopri.vala                              \
