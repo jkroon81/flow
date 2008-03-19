@@ -2,7 +2,7 @@ public class LinearTestEquation : FlowDemoODE {
   construct {
     var x_0 = new double[] {1.0};
 
-    _name = "Linear Test Equation";
+    name = "Linear Test Equation";
     x.set_data(1, x_0);
     t_start = 0.0;
     t_stop = 10.0;

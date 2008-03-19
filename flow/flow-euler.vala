@@ -7,21 +7,21 @@
 
 public class Flow.Euler : StepMethod {
   construct {
-    _order = 2;
+    order = 2;
   }
 
   public override Vector estimate_error() {
-    Vector x_h   = _vector[0];
-    Vector x_l   = _vector[1];
-    Vector dx    = _vector[2];
-    Vector error = _vector[3];
+    Vector x_h   = vector[0];
+    Vector x_l   = vector[1];
+    Vector dx    = vector[2];
+    Vector error = vector[3];
 
-    dx.mul(_ode.dx, _h);
-    x_l.add(_ode.x, dx);
+    dx.mul(ode.dx, h);
+    x_l.add(ode.x, dx);
     dx.mul(dx, 0.5);
-    x_h.add(_ode.x, dx);
-    _ode.eval_f(dx.get_data(), x_h.get_data(), _ode.u.get_data(), _ode.t + _h/2);
-    dx.mul(dx, _h/2);
+    x_h.add(ode.x, dx);
+    ode.eval_f(dx.get_data(), x_h.get_data(), ode.u.get_data(), ode.t + h/2);
+    dx.mul(dx, h/2);
     x_h.add(x_h, dx);
     error.mul(x_h, -1.0);
     error.add(error, x_l);
@@ -29,8 +29,8 @@ public class Flow.Euler : StepMethod {
   }
 
   public override void step() {
-    _ode.t += _h;
-    _ode.x.copy(_vector[0]);
-    _ode.eval_f(_ode.dx.get_data(), _ode.x.get_data(), _ode.u.get_data(), _ode.t);
+    ode.t += h;
+    ode.x.copy(vector[0]);
+    ode.eval_f(ode.dx.get_data(), ode.x.get_data(), ode.u.get_data(), ode.t);
   }
 }

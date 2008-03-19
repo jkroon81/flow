@@ -2,7 +2,7 @@ public class Constant : FlowDemoODE {
   construct {
     var x_0 = new double[] {0.0, 0.0, 0.0};
 
-    _name = "Constant";
+    name = "Constant";
     x.set_data(3, x_0);
     t_start = 0.0;
     t_stop = 10.0;

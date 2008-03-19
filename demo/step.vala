@@ -2,7 +2,7 @@ public class Step : FlowDemoODE {
   construct {
     var x_0 = new double[] {0.0, 0.0};
 
-    _name = "Step";
+    name = "Step";
     x.set_data(2, x_0);
     t_start = 0.0;
     t_stop = 20.0;

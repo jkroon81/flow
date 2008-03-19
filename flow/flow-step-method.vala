@@ -7,35 +7,17 @@
 
 public abstract class Flow.StepMethod : GLib.Object {
   const int N_VECTORS = 10;
-  protected Vector[] _vector;
-  protected ODE _ode;
-  protected int _order;
-  protected double _h;
-
-  public int order {
-    get { return _order; }
-  }
-
-  public double h {
-    set { _h = value; }
-  }
-
-  public ODE ode {
-    set {
-      int i;
-
-      _ode = value;
-      for(i = 0; i < N_VECTORS; i++)
-        _vector[i].size = _ode.x.size;
-    }
-  }
+  protected Vector[] vector;
+  public ODE ode   { protected get; set; }
+  public int order { get; protected set; }
+  public double h  { protected get; set; }
 
   construct {
     int i;
 
-    _vector = new Vector[N_VECTORS];
+    vector = new Vector[N_VECTORS];
     for(i = 0; i < N_VECTORS; i++)
-      _vector[i] = new Vector();
+      vector[i] = new Vector();
   }
 
   public abstract Vector estimate_error();

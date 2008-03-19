@@ -25,59 +25,59 @@ public class Flow.Integrator : ODESolver {
     uint n;
     bool final_step;
 
-    _n_successful_steps = 0;
-    _n_failed_steps = 0;
-    _step_method.ode = _ode;
-    _ode.t = _ode.t_start;
-    _ode.dx.size = _ode.x.size;
-    _ode.eval_f(_ode.dx.get_data(), _ode.x.get_data(), _ode.u.get_data(), _ode.t);
-    sample(_ode);
-    if(_uniform_sampling) {
+    n_successful_steps = 0;
+    n_failed_steps = 0;
+    step_method.ode = ode;
+    ode.t = ode.t_start;
+    ode.dx.size = ode.x.size;
+    ode.eval_f(ode.dx.get_data(), ode.x.get_data(), ode.u.get_data(), ode.t);
+    sample(ode);
+    if(uniform_sampling) {
       tmp = new Vector[4];
       for(n = 0; n < 4; n++)
         tmp[n] = new Vector();
     }
     h = 1.0;
     n = 1;
-    t_total = _ode.t_stop - _ode.t_start;
-    t_sample = _ode.t_start + t_total * n++ / _n_samples;
+    t_total = ode.t_stop - ode.t_start;
+    t_sample = ode.t_start + t_total * n++ / n_samples;
     while(true) {
-      if(_ode.t + h > _ode.t_stop) {
-        h = _ode.t_stop - _ode.t;
+      if(ode.t + h > ode.t_stop) {
+        h = ode.t_stop - ode.t;
         final_step = true;
       } else
         final_step = false;
-      _step_method.h = h;
-      local_error = _step_method.estimate_error().norm_1();
-      if(local_error < _tolerance) {
-        _n_successful_steps++;
-        if(_uniform_sampling) {
-          t_prev = _ode.t;
-          tmp[0].copy(_ode.x);
-          tmp[2].mul(_ode.dx, h);
+      step_method.h = h;
+      local_error = step_method.estimate_error().norm_1();
+      if(local_error < tolerance) {
+        n_successful_steps++;
+        if(uniform_sampling) {
+          t_prev = ode.t;
+          tmp[0].copy(ode.x);
+          tmp[2].mul(ode.dx, h);
         }
-        _step_method.step();
-        if(_uniform_sampling) {
-          t_next = _ode.t;
-          tmp[1].copy(_ode.x);
-          tmp[3].mul(_ode.dx, h);
+        step_method.step();
+        if(uniform_sampling) {
+          t_next = ode.t;
+          tmp[1].copy(ode.x);
+          tmp[3].mul(ode.dx, h);
           while(t_sample < t_next) {
-            _ode.t = t_sample;
-            _ode.x.interpolate(tmp[0], tmp[1], tmp[2], tmp[3], t_prev, t_next, t_sample);
+            ode.t = t_sample;
+            ode.x.interpolate(tmp[0], tmp[1], tmp[2], tmp[3], t_prev, t_next, t_sample);
             sample(ode);
-            t_sample = _ode.t_start + t_total * n++ / _n_samples;
+            t_sample = ode.t_start + t_total * n++ / n_samples;
           }
-          _ode.t = t_next;
-          _ode.x.copy(tmp[1]);
+          ode.t = t_next;
+          ode.x.copy(tmp[1]);
         } else
-          sample(_ode);
+          sample(ode);
         if(final_step)
           break;
       } else
-        _n_failed_steps++;
-      h = 0.9 * h * GLib.Math.pow(_tolerance / local_error, 1.0 / _step_method.order);
+        n_failed_steps++;
+      h = 0.9 * h * GLib.Math.pow(tolerance / local_error, 1.0 / step_method.order);
     }
-    if(_uniform_sampling)
-      sample(_ode);
+    if(uniform_sampling)
+      sample(ode);
   }
 }

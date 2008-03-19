@@ -15,9 +15,9 @@ public abstract class Flow.ODE : GLib.Object {
   public Vector u       { get; private set; }
 
   construct {
-    _dx = new Vector();
-    _x = new Vector();
-    _u = new Vector();
+    dx = new Vector();
+    x = new Vector();
+    u = new Vector();
   }
 
   [NoArrayLength]
@@ -25,7 +25,7 @@ public abstract class Flow.ODE : GLib.Object {
 
   [NoArrayLength]
   public void eval_f (weak double[] dx, weak double[] x, weak double[] u, double t) {
-    _n_f_evals++;
+    n_f_evals++;
     f_func(dx, x, u, t);
   }
 }

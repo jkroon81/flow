@@ -6,68 +6,68 @@
  */
 
 public class Flow.Vector : GLib.Object {
-  double[] _x;
+  double[] x;
 
   public uint size {
     get {
-      return _x.length;
+      return x.length;
     }
     set {
-      if(_x.length != value)
-        _x = new double[value];
+      if(x.length != value)
+        x = new double[value];
     }
   }
 
   [NoArrayLength]
   public weak double[] get_data () {
-    return _x;
+    return x;
   }
 
   [NoArrayLength]
   public void set_data(uint size, weak double[] x) {
-    if(_x.length != size)
-      _x = new double[size];
-    GLib.Memory.copy(_x, x, _x.length * sizeof(double));
+    if(this.x.length != size)
+      this.x = new double[size];
+    GLib.Memory.copy(this.x, x, this.x.length * sizeof(double));
   }
 
   public void set_null() {
     uint i;
 
-    for(i = 0; i < _x.length; i++)
-      _x[i] = 0.0;
+    for(i = 0; i < x.length; i++)
+      x[i] = 0.0;
   }
 
   public void copy(Vector v) {
-    if(_x.length != v._x.length)
-      _x = new double[v._x.length];
-    GLib.Memory.copy(_x, v._x, _x.length * sizeof(double));
+    if(x.length != v.x.length)
+      x = new double[v.x.length];
+    GLib.Memory.copy(x, v.x, x.length * sizeof(double));
   }
 
   public void mul(Vector v, double s) {
     uint i;
 
-    if(_x.length != v._x.length)
-      _x = new double[v._x.length];
-    for(i = 0; i < _x.length; i++)
-      _x[i] = v._x[i] * s;
+    if(x.length != v.x.length)
+      x = new double[v.x.length];
+    for(i = 0; i < x.length; i++)
+      x[i] = v.x[i] * s;
   }
 
   public void add(Vector v1, Vector v2) {
     uint i;
 
-    GLib.assert(v1._x.length == v2._x.length);
-    if(_x.length != v1._x.length)
-      _x = new double[v1._x.length];
-    for(i = 0; i < _x.length; i++)
-      _x[i] = v1._x[i] + v2._x[i];
+    GLib.assert(v1.x.length == v2.x.length);
+    if(x.length != v1.x.length)
+      x = new double[v1.x.length];
+    for(i = 0; i < x.length; i++)
+      x[i] = v1.x[i] + v2.x[i];
   }
 
   public double norm_1 () {
     uint i;
     double retval = 0.0;
 
-    for(i = 0; i < _x.length; i++)
-      retval += (_x[i] > 0.0 ? _x[i] : -_x[i]);
+    for(i = 0; i < x.length; i++)
+      retval += (x[i] > 0.0 ? x[i] : -x[i]);
     return retval;
   }
 
@@ -83,9 +83,9 @@ public class Flow.Vector : GLib.Object {
     Vector temp;
     double[] c;
 
-    GLib.assert(v1._x.length == v2._x.length);
-    GLib.assert(v1._x.length == dv1._x.length);
-    GLib.assert(v1._x.length == dv2._x.length);
+    GLib.assert(v1.x.length == v2.x.length);
+    GLib.assert(v1.x.length == dv1.x.length);
+    GLib.assert(v1.x.length == dv2.x.length);
     temp = new Vector();
     c = new double[4];
     t = (t - t1) / (t2 - t1);
