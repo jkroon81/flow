@@ -7,7 +7,7 @@ libflow_la_SOURCES =                                 \
 	flow-integrator.vala                         \
 	flow-ode.vala                                \
 	flow-ode-solver.vala                         \
-	flow-rungekutta-explicit.vala                \
+	flow-runge-kutta-explicit.vala               \
 	flow-solver.vala                             \
 	flow-step-method.vala                        \
 	flow-vector.vala

@@ -5,7 +5,7 @@
  *   Jacob Kroon <jacob.kroon@gmail.com>
  */
 
-public class Flow.Dopri : RungekuttaExplicit {
+public class Flow.Dopri : RungeKuttaExplicit {
   construct {
     _c  = new double[] { 0.0,            1.0/5.0, 3.0/10.0,       4.0/5.0,      8.0/9.0,           1.0,        1.0    };
     _b1 = new double[] { 5179.0/57600.0, 0.0,     7571.0/16695.0, 393.0/640.0,  -92097.0/339200.0, 187.0/2100, 1.0/40 };
