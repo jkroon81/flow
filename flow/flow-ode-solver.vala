@@ -5,6 +5,6 @@
  *   Jacob Kroon <jacob.kroon@gmail.com>
  */
 
-public class Flow.ODESolver : Solver {
+public abstract class Flow.ODESolver : Solver {
   public ODE ode { protected get; set; }
 }

@@ -5,7 +5,7 @@
  *   Jacob Kroon <jacob.kroon@gmail.com>
  */
 
-public class Flow.RungeKuttaExplicit : StepMethod {
+public abstract class Flow.RungeKuttaExplicit : StepMethod {
   [NoArrayLength] protected double[] c;
   [NoArrayLength] protected double[] b1;
   [NoArrayLength] protected double[] b2;
