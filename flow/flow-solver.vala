@@ -6,5 +6,5 @@
  */
 
 public abstract class Flow.Solver : GLib.Object {
-  public double tolerance { protected get; set construct; default(0.0001); }
+  public double tolerance { protected get; set construct; default = 0.0001; }
 }

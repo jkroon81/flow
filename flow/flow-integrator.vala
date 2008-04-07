@@ -8,8 +8,8 @@
 public class Flow.Integrator : ODESolver {
   public uint n_successful_steps { get; private set; }
   public uint n_failed_steps     { get; private set; }
-  public uint n_samples          { private get; set construct; default(500); }
-  public bool uniform_sampling   { private get; set construct; default(false); }
+  public uint n_samples          { private get; set construct; default = 500; }
+  public bool uniform_sampling   { private get; set construct; default = false; }
   public StepMethod step_method  { private get; set; }
 
   public signal void sample (ODE ode);
