@@ -14,10 +14,10 @@ class GtkStiffPendulum : Gtk.Window {
 
   construct {
     title = "Stiff Pendulum";
+    set_default_size(400, 400);
     delete_event += Gtk.main_quit;
 
     darea = new DrawingArea();
-    darea.set_size_request(400, 400);
     darea.expose_event += expose_cb;
 
     add(darea);
@@ -45,11 +45,14 @@ class GtkStiffPendulum : Gtk.Window {
   }
 
   void expose_cb(DrawingArea darea, EventExpose e) {
+    int width, height;
+
+    darea.window.get_size(out width, out height);
     var cr = Gdk.cairo_create(darea.window);
     cr.rectangle(e.area.x, e.area.y, e.area.width, e.area.height);
     cr.clip();
-    cr.set_line_width(1.0 / 400.0);
-    cr.scale(400.0, 400.0);
+    cr.set_line_width(1.0 / width);
+    cr.scale(width, height);
     cr.translate(0.5, 0.3);
     cr.scale(0.4, -0.4);
 
