@@ -1,4 +1,15 @@
-CLEANFILES      = *~
+CLEANFILES = *~
+
+VALAFLAGS =                                        \
+	--vapidir=/opt/vala-svn/share/vala/vapi    \
+	--vapidir=$(top_builddir)/flow             \
+	--pkg=flow                                 \
+	-C
+
+CFLAGS =                                           \
+	@GOBJECT_CFLAGS@                           \
+	-I$(top_builddir)/flow
+
 noinst_PROGRAMS =                                  \
 	flow-demo                                  \
 	gtk-ball-on-beam                           \
@@ -15,15 +26,6 @@ flow_demo_SOURCES =                                \
 	step.vala                                  \
 	stiff-pendulum.vala
 
-flow_demo_VALAFLAGS =                              \
-	--vapidir=/opt/vala-svn/share/vala/vapi    \
-	--vapidir=$(top_builddir)/flow             \
-	--pkg=flow
-
-flow_demo_CFLAGS =                                 \
-	@GOBJECT_CFLAGS@                           \
-	-I$(top_builddir)/flow
-
 flow_demo_LDADD =                                  \
 	@GOBJECT_LIBS@                             \
 	$(top_builddir)/flow/libflow.la
@@ -34,14 +36,10 @@ gtk_ball_on_beam_SOURCES =                         \
 	gtk-ball-on-beam.vala
 
 gtk_ball_on_beam_VALAFLAGS =                       \
-	--vapidir=/opt/vala-svn/share/vala/vapi    \
-	--vapidir=$(top_builddir)/flow             \
-	--pkg=gtk+-2.0                             \
-	--pkg=flow
+	--pkg=gtk+-2.0
 
 gtk_ball_on_beam_CFLAGS =                          \
-	@GTK_CFLAGS@                               \
-	-I$(top_builddir)/flow
+	@GTK_CFLAGS@
 
 gtk_ball_on_beam_LDADD =                           \
 	@GTK_LIBS@                                 \
@@ -53,14 +51,10 @@ gtk_stiff_pendulum_SOURCES =                       \
 	gtk-stiff-pendulum.vala
 
 gtk_stiff_pendulum_VALAFLAGS =                     \
-	--vapidir=/opt/vala-svn/share/vala/vapi    \
-	--vapidir=$(top_builddir)/flow             \
-	--pkg=gtk+-2.0                             \
-	--pkg=flow
+	--pkg=gtk+-2.0
 
 gtk_stiff_pendulum_CFLAGS =                        \
-	@GTK_CFLAGS@                               \
-	-I$(top_builddir)/flow
+	@GTK_CFLAGS@
 
 gtk_stiff_pendulum_LDADD =                         \
 	@GTK_LIBS@                                 \
@@ -68,15 +62,6 @@ gtk_stiff_pendulum_LDADD =                         \
 
 interpolate_SOURCES =                              \
 	interpolate.vala
-
-interpolate_VALAFLAGS =                            \
-	--vapidir=/opt/vala-svn/share/vala/vapi    \
-	--vapidir=$(top_builddir)/flow             \
-	--pkg=flow
-
-interpolate_CFLAGS =                               \
-	@GOBJECT_CFLAGS@                           \
-	-I$(top_builddir)/flow
 
 interpolate_LDADD =                                \
 	@GOBJECT_LIBS@                             \
