@@ -23,7 +23,7 @@ class GtkBallOnBeam : Gtk.Window {
   construct {
     title = "Ball On Beam";
     set_default_size(400, 400);
-    delete_event += Gtk.main_quit;
+    destroy += Gtk.main_quit;
 
     darea = new DrawingArea();
     darea.expose_event += expose_cb;
@@ -63,9 +63,11 @@ class GtkBallOnBeam : Gtk.Window {
     return true;
   }
 
-  void expose_cb(DrawingArea darea, EventExpose e) {
+  bool expose_cb(Widget widget, EventExpose e) {
+    DrawingArea darea;
     int width, height;
 
+    darea = (DrawingArea) widget;
     darea.window.get_size(out width, out height);
     var cr = Gdk.cairo_create(darea.window);
     cr.rectangle(e.area.x, e.area.y, e.area.width, e.area.height);
@@ -97,6 +99,8 @@ class GtkBallOnBeam : Gtk.Window {
     cr.fill_preserve();
     cr.set_source_rgb(0.0, 0.0, 0.0);
     cr.stroke();
+
+    return false;
   }
 
   public static int main(string[] args) {

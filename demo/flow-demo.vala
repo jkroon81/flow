@@ -76,9 +76,9 @@ class FlowDemo : Object {
     integrator.run();
 
     if ((flags & Flags.PRINT_STATS) != 0) {
-      stdout.printf("%d F-evaluations\n", ode[ode_id - 1].n_f_evals);
-      stdout.printf("%d successful steps\n", integrator.n_successful_steps);
-      stdout.printf("%d failed steps\n", integrator.n_failed_steps);
+      stdout.printf("%u F-evaluations\n", ode[ode_id - 1].n_f_evals);
+      stdout.printf("%u successful steps\n", integrator.n_successful_steps);
+      stdout.printf("%u failed steps\n", integrator.n_failed_steps);
     }
 
     return 0;
