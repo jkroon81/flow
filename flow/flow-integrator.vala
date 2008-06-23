@@ -75,7 +75,7 @@ public class Flow.Integrator : ODESolver {
           break;
       } else
         n_failed_steps++;
-      h = 0.9 * h * GLib.Math.pow(tolerance / local_error, 1.0 / step_method.order);
+      h = 0.9 * h * Math.pow(tolerance / local_error, 1.0 / step_method.order);
     }
     if(uniform_sampling)
       sample(ode);

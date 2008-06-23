@@ -1,4 +1,3 @@
-using GLib;
 using Gdk;
 using Gtk;
 using Cairo;

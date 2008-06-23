@@ -5,6 +5,6 @@
  *   Jacob Kroon <jacob.kroon@gmail.com>
  */
 
-public abstract class Flow.Solver : GLib.Object {
+public abstract class Flow.Solver : Object {
   public double tolerance { protected get; set construct; default = 0.0001; }
 }

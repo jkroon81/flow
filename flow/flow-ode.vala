@@ -7,7 +7,7 @@
 
 public static delegate void Flow.FFunc (double* dx, double* x, double* u, double t);
 
-public class Flow.ODE : GLib.Object {
+public class Flow.ODE : Object {
   public double t_start { get; set; }
   public double t_stop  { get; set; }
   public double t       { get; set; }

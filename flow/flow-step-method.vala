@@ -5,7 +5,7 @@
  *   Jacob Kroon <jacob.kroon@gmail.com>
  */
 
-public abstract class Flow.StepMethod : GLib.Object {
+public abstract class Flow.StepMethod : Object {
   const int N_VECTORS = 10;
   protected Vector[] vector;
   public ODE ode   { protected get; set; }

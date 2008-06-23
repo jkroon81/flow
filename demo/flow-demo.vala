@@ -1,5 +1,3 @@
-using GLib;
-
 enum Flags {
   NONE        = 0,
   PRINT_STATS = 1 << 0,

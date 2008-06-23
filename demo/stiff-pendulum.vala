@@ -11,7 +11,7 @@ public class StiffPendulum : FlowDemoODE {
     f_func= (dx, x, u, t) => {
       double lambda;
 
-      lambda = C*(GLib.Math.sqrt(x[0]*x[0]+x[1]*x[1])-1)/GLib.Math.sqrt(x[0]*x[0]+x[1]*x[1]);
+      lambda = C*(Math.sqrt(x[0]*x[0]+x[1]*x[1])-1)/Math.sqrt(x[0]*x[0]+x[1]*x[1]);
       dx[0] = x[2];
       dx[1] = x[3];
       dx[2] = -lambda*x[0];

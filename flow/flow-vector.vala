@@ -5,7 +5,7 @@
  *   Jacob Kroon <jacob.kroon@gmail.com>
  */
 
-public class Flow.Vector : GLib.Object {
+public class Flow.Vector : Object {
   double[] x;
 
   public uint size {
@@ -25,7 +25,7 @@ public class Flow.Vector : GLib.Object {
   public void set_data(uint size, double* x) {
     if(this.x.length != size)
       this.x = new double[size];
-    GLib.Memory.copy(this.x, x, this.x.length * sizeof(double));
+    Memory.copy(this.x, x, this.x.length * sizeof(double));
   }
 
   public void set_null() {
@@ -38,7 +38,7 @@ public class Flow.Vector : GLib.Object {
   public void copy(Vector v) {
     if(x.length != v.x.length)
       x = new double[v.x.length];
-    GLib.Memory.copy(x, v.x, x.length * sizeof(double));
+    Memory.copy(x, v.x, x.length * sizeof(double));
   }
 
   public void mul(Vector v, double s) {
@@ -53,7 +53,7 @@ public class Flow.Vector : GLib.Object {
   public void add(Vector v1, Vector v2) {
     uint i;
 
-    GLib.assert(v1.x.length == v2.x.length);
+    assert(v1.x.length == v2.x.length);
     if(x.length != v1.x.length)
       x = new double[v1.x.length];
     for(i = 0; i < x.length; i++)
@@ -81,9 +81,9 @@ public class Flow.Vector : GLib.Object {
     Vector temp;
     double[] c;
 
-    GLib.assert(v1.x.length == v2.x.length);
-    GLib.assert(v1.x.length == dv1.x.length);
-    GLib.assert(v1.x.length == dv2.x.length);
+    assert(v1.x.length == v2.x.length);
+    assert(v1.x.length == dv1.x.length);
+    assert(v1.x.length == dv2.x.length);
     temp = new Vector();
     c = new double[4];
     t = (t - t1) / (t2 - t1);
