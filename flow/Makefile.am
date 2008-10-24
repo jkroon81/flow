@@ -1,7 +1,7 @@
 lib_LTLIBRARIES = libflow.la
 
 CLEANFILES =                                         \
-	flow.gidl                                    \
+	flow.gir                                     \
 	flow.vapi                                    \
 	*~
 
