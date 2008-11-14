@@ -15,11 +15,11 @@ public class Flow.Integrator : ODESolver {
   public signal void sample (ODE ode);
 
   public void run() {
-    Vector[] tmp;
+    Vector[] tmp = null;
     double local_error;
     double t_total;
     double t_sample;
-    double t_prev;
+    double t_prev = 0.0;
     double t_next;
     double h;
     uint n;
