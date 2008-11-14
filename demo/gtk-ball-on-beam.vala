@@ -8,7 +8,6 @@ class GtkBallOnBeam : Gtk.Window {
   Widget darea;
   Widget slider;
   Timer timer;
-  ODE ode;
   Integrator integrator;
   double[] u;
   double angle;

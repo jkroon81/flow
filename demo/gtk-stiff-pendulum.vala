@@ -6,7 +6,6 @@ using Flow;
 class GtkStiffPendulum : Gtk.Window {
   Widget darea;
   Timer timer;
-  ODE ode;
   Integrator integrator;
   double x;
   double y;
