@@ -43,6 +43,8 @@ class FlowDemo : Object {
       return 0;
     }
 
+    step_method = new Flow.Dopri();
+
     flags = Flags.NONE;
     for(i = 2; i < args.length; i++)
       if(args[i] == "--stats")
@@ -62,7 +64,7 @@ class FlowDemo : Object {
 
     integrator = new Flow.Integrator();
     integrator.uniform_sampling = (flags & Flags.UNIFORM) != 0;
-    integrator.step_method = step_method != null ? step_method : new Flow.Dopri();
+    integrator.step_method = step_method;
     integrator.ode = ode[ode_id - 1];
     integrator.sample += (integrator, ode) => {
       int i;
