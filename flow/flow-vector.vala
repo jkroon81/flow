@@ -79,13 +79,12 @@ public class Flow.Vector : Object {
   {
     /* See http://en.wikipedia.org/wiki/Cubic_Hermite_spline */
     Vector temp;
-    double[] c;
+    double[4] c = {0, 0, 0, 0};
 
     assert(v1.x.length == v2.x.length);
     assert(v1.x.length == dv1.x.length);
     assert(v1.x.length == dv2.x.length);
     temp = new Vector();
-    c = new double[4];
     t = (t - t1) / (t2 - t1);
     c[0] = 2*t*t*t - 3*t*t + 1;
     c[1] = t*t*t - 2*t*t + t;
