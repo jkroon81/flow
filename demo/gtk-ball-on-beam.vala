@@ -53,7 +53,7 @@ class GtkBallOnBeam : Gtk.Window {
     u[0] = ((Range)slider).get_value();
     integrator.ode.t_start = integrator.ode.t_stop;
     integrator.ode.t_stop = timer.elapsed();
-    integrator.ode.u.set_data(1, u);
+    integrator.ode.u.set_from_array(1, u);
     integrator.run();
     pos = integrator.ode.x.data[3];
     angle = integrator.ode.x.data[0];

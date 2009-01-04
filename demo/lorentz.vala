@@ -7,7 +7,7 @@ public class Lorentz : FlowDemoODE {
     var x_0 = new double[] {10.0, 10.0, 10.0};
 
     name = "Lorentz attractor";
-    x.set_data(3, x_0);
+    x.set_from_array(3, x_0);
     t_start = 0.0;
     t_stop = 50.0;
     f_func = (dx, x, u, t) => {

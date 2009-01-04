@@ -13,10 +13,10 @@ class Interpolate {
     double[] dx2 = new double[] {0.0, -1.0, 0.0};
     double t;
 
-    v1.set_data(3, x1);
-    v2.set_data(3, x2);
-    dv1.set_data(3, dx1);
-    dv2.set_data(3, dx2);
+    v1.set_from_array(3, x1);
+    v2.set_from_array(3, x2);
+    dv1.set_from_array(3, dx1);
+    dv2.set_from_array(3, dx2);
     for(t = 0.0; t < 5.0; t += 0.05) {
       v.interpolate(v1, v2, dv1, dv2, 0.0, 5.0, t);
       stdout.printf("t=%f, x1=%f, x2=%f, x3=%f\n", t, v.data[0], v.data[1], v.data[2]);

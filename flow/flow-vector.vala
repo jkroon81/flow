@@ -24,7 +24,7 @@ public class Flow.Vector : Object {
     }
   }
 
-  public void set_data(uint size, double* x) {
+  public void set_from_array(uint size, double* x) {
     if(this.x.length != size)
       this.x = new double[size];
     Memory.copy(this.x, x, this.x.length * sizeof(double));
