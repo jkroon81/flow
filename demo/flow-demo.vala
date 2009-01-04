@@ -70,7 +70,7 @@ class FlowDemo : Object {
       int i;
 
       for(i = 0; i < ode.x.size; i++)
-        stdout.printf("x%d = %f, ", i, ode.x.get_data()[i]);
+        stdout.printf("x%d = %f, ", i, ode.x.data[i]);
       stdout.printf("t = %f\n", ode.t);
     };
     integrator.run();

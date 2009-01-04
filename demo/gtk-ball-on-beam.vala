@@ -55,8 +55,8 @@ class GtkBallOnBeam : Gtk.Window {
     integrator.ode.t_stop = timer.elapsed();
     integrator.ode.u.set_data(1, u);
     integrator.run();
-    pos = integrator.ode.x.get_data()[3];
-    angle = integrator.ode.x.get_data()[0];
+    pos = integrator.ode.x.data[3];
+    angle = integrator.ode.x.data[0];
     darea.queue_draw();
     return true;
   }

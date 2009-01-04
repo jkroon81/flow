@@ -30,7 +30,7 @@ public class Flow.Integrator : ODESolver {
     step_method.ode = ode;
     ode.t = ode.t_start;
     ode.dx.size = ode.x.size;
-    ode.eval_f(ode.dx.get_data(), ode.x.get_data(), ode.u.get_data(), ode.t);
+    ode.eval_f(ode.dx.data, ode.x.data, ode.u.data, ode.t);
     sample(ode);
     if(uniform_sampling) {
       tmp = new Vector[4];

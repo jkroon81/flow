@@ -36,8 +36,8 @@ class GtkStiffPendulum : Gtk.Window {
     integrator.ode.t_start = integrator.ode.t_stop;
     integrator.ode.t_stop = timer.elapsed();
     integrator.run();
-    x = integrator.ode.x.get_data()[0];
-    y = integrator.ode.x.get_data()[1];
+    x = integrator.ode.x.data[0];
+    y = integrator.ode.x.data[1];
     darea.queue_draw();
     return true;
   }

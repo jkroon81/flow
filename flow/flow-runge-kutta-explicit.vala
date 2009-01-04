@@ -29,7 +29,7 @@ public abstract class Flow.RungeKuttaExplicit : StepMethod {
         dx.mul(k[j], a[(i-1)*(n_stages-1)+j]);
         temp.add(temp, dx);
       }
-      ode.eval_f(dx.get_data(), temp.get_data(), ode.u.get_data(), ode.t + c[i]*h);
+      ode.eval_f(dx.data, temp.data, ode.u.data, ode.t + c[i]*h);
       k[i].mul(dx, h);
       temp.mul(k[i], b2[i] - b1[i]);
       error.add(error, temp);
@@ -46,6 +46,6 @@ public abstract class Flow.RungeKuttaExplicit : StepMethod {
       k[i].mul(k[i], b2[i]);
       ode.x.add(ode.x, k[i]);
     }
-    ode.eval_f(ode.dx.get_data(), ode.x.get_data(), ode.u.get_data(), ode.t);
+    ode.eval_f(ode.dx.data, ode.x.data, ode.u.data, ode.t);
   }
 }

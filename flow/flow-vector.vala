@@ -8,6 +8,12 @@
 public class Flow.Vector : Object {
   double[] x;
 
+  public double* data {
+    get {
+      return x;
+    }
+  }
+
   public uint size {
     get {
       return x.length;
@@ -16,10 +22,6 @@ public class Flow.Vector : Object {
       if(x.length != value)
         x = new double[value];
     }
-  }
-
-  public double* get_data () {
-    return x;
   }
 
   public void set_data(uint size, double* x) {

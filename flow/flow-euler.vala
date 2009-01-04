@@ -20,7 +20,7 @@ public class Flow.Euler : StepMethod {
     x_l.add(ode.x, dx);
     dx.mul(dx, 0.5);
     x_h.add(ode.x, dx);
-    ode.eval_f(dx.get_data(), x_h.get_data(), ode.u.get_data(), ode.t + h/2);
+    ode.eval_f(dx.data, x_h.data, ode.u.data, ode.t + h/2);
     dx.mul(dx, h/2);
     x_h.add(x_h, dx);
     error.mul(x_h, -1.0);
@@ -31,6 +31,6 @@ public class Flow.Euler : StepMethod {
   public override void step() {
     ode.t += h;
     ode.x.copy(vector[0]);
-    ode.eval_f(ode.dx.get_data(), ode.x.get_data(), ode.u.get_data(), ode.t);
+    ode.eval_f(ode.dx.data, ode.x.data, ode.u.data, ode.t);
   }
 }
