@@ -20,7 +20,7 @@ public abstract class Flow.RungeKuttaExplicit : StepMethod {
     uint i;
     uint j;
 
-    /* NOTE: _c[0] must always be zero */
+    /* NOTE: c[0] must always be zero */
     k[0].mul(ode.dx, h);
     error.mul(k[0], b2[0] - b1[0]);
     for(i = 1; i < n_stages; i++) {
