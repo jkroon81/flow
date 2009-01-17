@@ -67,10 +67,10 @@ class FlowDemo : Object {
     integrator.step_method = step_method;
     integrator.ode = ode[ode_id - 1];
     integrator.sample += (integrator, ode) => {
-      int i;
+      int j;
 
-      for(i = 0; i < ode.x.size; i++)
-        stdout.printf("x%d = %f, ", i, ode.x.data[i]);
+      for(j = 0; j < ode.x.size; j++)
+        stdout.printf("x%d = %f, ", j, ode.x.data[j]);
       stdout.printf("t = %f\n", ode.t);
     };
     integrator.run();
