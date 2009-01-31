@@ -20,6 +20,6 @@ public abstract class Flow.StepMethod : Object {
       vector[i] = new Vector();
   }
 
-  public abstract Vector estimate_error();
-  public abstract void step();
+  internal abstract Vector estimate_error();
+  internal abstract void step();
 }

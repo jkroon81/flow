@@ -23,7 +23,7 @@ public class Flow.ODE : Object {
     u = new Vector();
   }
 
-  public void eval_f (double* dx, double* x, double* u, double t) {
+  internal void eval_f (double* dx, double* x, double* u, double t) {
     n_f_evals++;
     f_func(dx, x, u, t);
   }

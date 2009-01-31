@@ -10,7 +10,7 @@ public class Flow.Euler : StepMethod {
     order = 2;
   }
 
-  public override Vector estimate_error() {
+  internal override Vector estimate_error() {
     Vector x_h   = vector[0];
     Vector x_l   = vector[1];
     Vector dx    = vector[2];
@@ -28,7 +28,7 @@ public class Flow.Euler : StepMethod {
     return error;
   }
 
-  public override void step() {
+  internal override void step() {
     ode.t += h;
     ode.x.copy(vector[0]);
     ode.eval_f(ode.dx.data, ode.x.data, ode.u.data, ode.t);

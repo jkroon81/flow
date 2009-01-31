@@ -12,7 +12,7 @@ public abstract class Flow.RungeKuttaExplicit : StepMethod {
   protected double* a;
   protected uint n_stages;
 
-  public override Vector estimate_error() {
+  internal override Vector estimate_error() {
     unowned Vector[] k = vector;
     Vector dx    = vector[n_stages];
     Vector error = vector[n_stages+1];
@@ -37,7 +37,7 @@ public abstract class Flow.RungeKuttaExplicit : StepMethod {
     return error;
   }
 
-  public override void step() {
+  internal override void step() {
     unowned Vector[] k = vector;
     uint i;
 
