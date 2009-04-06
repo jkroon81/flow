@@ -19,7 +19,7 @@ libflow_la_SOURCES =                                 \
 libflow_la_VALAFLAGS =                               \
 	--vapidir=/opt/vala-svn/share/vala/vapi      \
 	--library=flow                               \
-	-C
+	-C -H flow.h
 
 libflow_la_CFLAGS =                                  \
 	@GOBJECT_CFLAGS@                             \
