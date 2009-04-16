@@ -10,7 +10,7 @@ class FlowDemo : Object {
   void print_help () {
     int i;
 
-    stdout.printf("Usage: flow-demo <ode>\n");
+    stdout.printf("Usage: flow-demo <ode> [--stats] [--uniform] [--method <step-method>]\n");
     stdout.printf(" ODE\n");
     for(i = 0; i < ode.length; i++)
       stdout.printf("  %d %s\n", i + 1, ode[i].name);
