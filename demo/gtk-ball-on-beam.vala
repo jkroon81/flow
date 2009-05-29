@@ -12,11 +12,11 @@ class GtkBallOnBeam : Gtk.Window {
   double[] u;
   double angle;
   double pos;
-  float BALL_RADIUS = 0.02;
-  float BEAM_LENGTH = 0.6;
-  float BEAM_HEIGHT = 0.02;
-  float BOX_WIDTH = 0.5;
-  float BOX_HEIGHT = 0.3;
+  const float BALL_RADIUS = 0.02;
+  const float BEAM_LENGTH = 0.6;
+  const float BEAM_HEIGHT = 0.02;
+  const float BOX_WIDTH = 0.5;
+  const float BOX_HEIGHT = 0.3;
 
   construct {
     title = "Ball On Beam";

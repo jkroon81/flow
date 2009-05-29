@@ -1,5 +1,5 @@
 public class StiffPendulum : FlowDemoODE {
-  static double C = 1000.0;
+  const double C = 1000.0;
 
   construct {
     var x_0 = new double[] {0.9, 0.1, 0.0, 0.0};

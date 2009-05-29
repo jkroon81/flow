@@ -1,7 +1,7 @@
 public class Lorentz : FlowDemoODE {
-  static double a = 10.0;
-  static double b = 28.0;
-  static double c = 8.0/3.0;
+  const double a = 10.0;
+  const double b = 28.0;
+  const double c = 8.0/3.0;
 
   construct {
     var x_0 = new double[] {10.0, 10.0, 10.0};

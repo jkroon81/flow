@@ -1,18 +1,18 @@
 /* See http://www.control.lth.se/education/laboratory/bommen.html */
 
 public class BallOnBeam : FlowDemoODE {
-  static double w = 1.0;
-  static double b1 = 225.0;
-  static double b0 = 46900.0;
-  static double a2 = 103.0;
-  static double a1 = 10100.0;
-  static double a0 = 833.0;
-  static double c1 = 0.15;
-  static double c0 = -6.7;
-  static double k1 = -0.45*w*w;
-  static double td = 1.0/w;
-  static double ti = 3.0*1.0/w;
-  static double k2 = 2.0;
+  const double w = 1.0;
+  const double b1 = 225.0;
+  const double b0 = 46900.0;
+  const double a2 = 103.0;
+  const double a1 = 10100.0;
+  const double a0 = 833.0;
+  const double c1 = 0.15;
+  const double c0 = -6.7;
+  const double k1 = -0.45 * w * w;
+  const double td = 1.0 / w;
+  const double ti = 3.0 * 1.0 / w;
+  const double k2 = 2.0;
 
   construct {
     var x_0 = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
