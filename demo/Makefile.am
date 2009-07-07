@@ -1,8 +1,5 @@
 CLEANFILES = *~
 
-MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.vm
-
 VALAFLAGS = \
 	--vapidir=/opt/vala-svn/share/vala/vapi \
 	--vapidir=$(top_builddir)/flow \
@@ -70,6 +67,3 @@ interpolate_LDADD = \
 	@GOBJECT_LIBS@ \
 	$(top_builddir)/flow/libflow.la
 
-include Makefile.vm
-
--include $(top_srcdir)/git.mk

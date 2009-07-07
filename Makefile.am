@@ -17,4 +17,3 @@ SUBDIRS = \
 	demo \
 	util
 
--include $(top_srcdir)/git.mk

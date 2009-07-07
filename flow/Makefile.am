@@ -6,9 +6,6 @@ CLEANFILES = \
 	flow.vapi \
 	*~
 
-MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.vm
-
 libflow_ladir = $(includedir)/flow
 
 libflow_la_SOURCES = \
@@ -38,6 +35,3 @@ libflow_la_LIBADD = \
 	@GOBJECT_LIBS@ \
 	-lm
 
-include Makefile.vm
-
--include $(top_srcdir)/git.mk
