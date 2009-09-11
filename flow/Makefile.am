@@ -12,6 +12,7 @@ libflow_la_SOURCES = \
 	flow-dopri.vala \
 	flow-euler.vala \
 	flow-integrator.vala \
+	flow-math.c \
 	flow-ode.vala \
 	flow-ode-solver.vala \
 	flow-runge-kutta-explicit.vala \
