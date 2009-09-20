@@ -24,13 +24,11 @@ libflow_la_HEADERS = \
 	flow.h
 
 libflow_la_VALAFLAGS = \
-	--vapidir=/opt/vala-svn/share/vala/vapi \
 	--library=flow \
-	-C -H flow.h
+	-H flow.h
 
 libflow_la_CFLAGS = \
-	@GOBJECT_CFLAGS@ \
-	-I$(top_builddir)
+	@GOBJECT_CFLAGS@
 
 libflow_la_LIBADD = \
 	@GOBJECT_LIBS@ \
