@@ -100,11 +100,11 @@ class GtkBallOnBeam : Gtk.Window {
 
     return false;
   }
+}
 
-  public static int main(string[] args) {
-    Gtk.init(ref args);
-    new GtkBallOnBeam();
-    Gtk.main();
-    return 0;
-  }
+int main(string[] args) {
+  Gtk.init(ref args);
+  new GtkBallOnBeam();
+  Gtk.main();
+  return 0;
 }
