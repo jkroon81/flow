@@ -5,8 +5,6 @@
  *   Jacob Kroon <jacob.kroon@gmail.com>
  */
 
-public static delegate void Flow.FFunc (double* dx, double* x, double* u, double t);
-
 public class Flow.ODE : Object {
   public double t_start { get; set; }
   public double t_stop  { get; set; }
@@ -16,6 +14,8 @@ public class Flow.ODE : Object {
   public Vector x       { get; private set; }
   public Vector u       { get; private set; }
   public FFunc f_func   { private get; set; }
+
+  public delegate void FFunc (double* dx, double* x, double* u, double t);
 
   construct {
     dx = new Vector();
