@@ -15,6 +15,7 @@ public class Flow.ODE : Object {
   public Vector u       { get; private set; }
   public FFunc f_func   { private get; set; }
 
+  [CCode (has_target = false)]
   public delegate void FFunc (double* dx, double* x, double* u, double t);
 
   construct {
