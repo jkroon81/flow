@@ -36,7 +36,7 @@ int main(string[] args) {
     return 0;
   }
 
-  ode_id = args[1].to_int();
+  ode_id = int.parse(args[1]);
   if(ode_id < 1 || ode_id > ode.length) {
     print_help();
     return 0;
@@ -65,13 +65,15 @@ int main(string[] args) {
   integrator.uniform_sampling = (flags & Flags.UNIFORM) != 0;
   integrator.step_method = step_method;
   integrator.ode = ode[ode_id - 1];
-  integrator.sample += (integrator, ode) => {
-    int j;
+  integrator.sample.connect(
+    (integrator, ode) => {
+      int j;
 
-    for(j = 0; j < ode.x.size; j++)
-      stdout.printf("x%d = %f, ", j, ode.x.data[j]);
-    stdout.printf("t = %f\n", ode.t);
-  };
+      for(j = 0; j < ode.x.size; j++)
+        stdout.printf("x%d = %f, ", j, ode.x.data[j]);
+      stdout.printf("t = %f\n", ode.t);
+    }
+  );
   integrator.run();
 
   if ((flags & Flags.PRINT_STATS) != 0) {

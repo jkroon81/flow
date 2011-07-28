@@ -13,10 +13,10 @@ class GtkStiffPendulum : Gtk.Window {
   construct {
     title = "Stiff Pendulum";
     set_default_size(400, 400);
-    destroy += Gtk.main_quit;
+    destroy.connect(Gtk.main_quit);
 
     darea = new DrawingArea();
-    darea.expose_event += expose_cb;
+    darea.expose_event.connect(expose_cb);
 
     add(darea);
     show_all();

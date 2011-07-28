@@ -21,10 +21,10 @@ class GtkBallOnBeam : Gtk.Window {
   construct {
     title = "Ball On Beam";
     set_default_size(400, 400);
-    destroy += Gtk.main_quit;
+    destroy.connect(Gtk.main_quit);
 
     darea = new DrawingArea();
-    darea.expose_event += expose_cb;
+    darea.expose_event.connect(expose_cb);
 
     slider = new HScale.with_range(-0.8 * BEAM_LENGTH / 2, 0.8 * BEAM_LENGTH / 2, BEAM_LENGTH / 10);
     ((Range)slider).set_value(0.0);
