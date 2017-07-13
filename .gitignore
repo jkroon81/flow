@@ -1,4 +1,5 @@
-*.[cdho]
+*.[acdho]
 *.so
+*.swp
 *.vala-stamp
 *.vapi
