@@ -21,7 +21,7 @@ class GtkStiffPendulum : Gtk.Window {
     add(darea);
     show_all();
 
-    Timeout.add(1000 / 25, refresh_cb);
+    GLib.Timeout.add(1000 / 25, refresh_cb);
 
     integrator = new Integrator();
     integrator.step_method = new Dopri();
